@@ -1,0 +1,72 @@
+# CI/CD — GitHub Actions Test Workflow
+# 
+# Version: PDF v1.0.0 | Kit: Building Kit
+# Stage: 5 (Verify)
+# Purpose: Runs tests + lint on every push and pull request.
+# Copy to: .github/workflows/test.yml in your project.
+
+name: Test & Lint
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # Uncomment and configure for your stack:
+
+    # --- Node.js ---
+    # strategy:
+    #   matrix:
+    #     node-version: [18, 20]
+    # steps:
+    #   - uses: actions/checkout@v4
+    #   - uses: actions/setup-node@v4
+    #     with:
+    #       node-version: ${{ matrix.node-version }}
+    #       cache: 'npm'
+    #   - run: npm ci
+    #   - run: npm run lint
+    #   - run: npm test
+
+    # --- Python ---
+    # strategy:
+    #   matrix:
+    #     python-version: ['3.11', '3.12']
+    # steps:
+    #   - uses: actions/checkout@v4
+    #   - uses: actions/setup-python@v5
+    #     with:
+    #       python-version: ${{ matrix.python-version }}
+    #   - run: pip install -e ".[dev]"
+    #   - run: ruff check .
+    #   - run: pytest --cov=src
+
+    # --- Flutter ---
+    # steps:
+    #   - uses: actions/checkout@v4
+    #   - uses: subosito/flutter-action@v2
+    #     with:
+    #       flutter-version: '3.x'
+    #   - run: flutter pub get
+    #   - run: dart analyze
+    #   - run: flutter test
+
+    # --- .NET ---
+    # steps:
+    #   - uses: actions/checkout@v4
+    #   - uses: actions/setup-dotnet@v4
+    #     with:
+    #       dotnet-version: '8.x'
+    #   - run: dotnet restore
+    #   - run: dotnet build --no-restore
+    #   - run: dotnet test --no-build
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace this with your stack configuration
+        run: echo "Configure this workflow for your tech stack. See comments above."
