@@ -93,51 +93,51 @@
 - [ ] building-kit/docs/quality-scorecard.md
 
 ## M9 — Content Creation Kit (content-creation-kit)
-- [ ] content-creation-kit/README.md
-- [ ] content-creation-kit/guides/content-writer.md
-- [ ] content-creation-kit/guides/illustrator.md
-- [ ] content-creation-kit/guides/voice-actor.md
-- [ ] content-creation-kit/guides/legal-compliance.md
-- [ ] content-creation-kit/templates/content-pipeline.md
-- [ ] content-creation-kit/templates/asset-pipeline.md
-- [ ] content-creation-kit/templates/style-guide.md
-- [ ] content-creation-kit/templates/review-workflow.md
-- [ ] content-creation-kit/checklists/content-review.md
-- [ ] content-creation-kit/checklists/asset-review.md
-- [ ] content-creation-kit/checklists/compliance-review.md
+- [x] content-creation-kit/README.md
+- [x] content-creation-kit/guides/content-writer.md
+- [x] content-creation-kit/guides/illustrator.md
+- [x] content-creation-kit/guides/voice-actor.md
+- [x] content-creation-kit/guides/legal-compliance.md
+- [x] content-creation-kit/templates/content-pipeline.md
+- [x] content-creation-kit/templates/asset-pipeline.md
+- [x] content-creation-kit/templates/style-guide.md
+- [x] content-creation-kit/templates/review-workflow.md
+- [x] content-creation-kit/checklists/content-review.md
+- [x] content-creation-kit/checklists/asset-review.md
+- [x] content-creation-kit/checklists/compliance-review.md
 
 ## M10 — Maintenance Kit (maintenance-kit)
-- [ ] maintenance-kit/README.md
-- [ ] maintenance-kit/launch-prep/beta-test-plan.md
-- [ ] maintenance-kit/launch-prep/app-store-submission.md
-- [ ] maintenance-kit/launch-prep/go-to-market.md
-- [ ] maintenance-kit/launch-prep/compliance-final.md
-- [ ] maintenance-kit/post-launch/monitoring-setup.md
-- [ ] maintenance-kit/post-launch/feedback-collection.md
-- [ ] maintenance-kit/post-launch/iteration-workflow.md
-- [ ] maintenance-kit/post-launch/retrospective.md
-- [ ] maintenance-kit/gates/GATE-05-release.md
-- [ ] maintenance-kit/gates/GATE-06-launch.md
-- [ ] maintenance-kit/gates/GATE-07-continue.md
+- [x] maintenance-kit/README.md
+- [x] maintenance-kit/launch-prep/beta-test-plan.md
+- [x] maintenance-kit/launch-prep/app-store-submission.md
+- [x] maintenance-kit/launch-prep/go-to-market.md
+- [x] maintenance-kit/launch-prep/compliance-final.md
+- [x] maintenance-kit/post-launch/monitoring-setup.md
+- [x] maintenance-kit/post-launch/feedback-collection.md
+- [x] maintenance-kit/post-launch/iteration-workflow.md
+- [x] maintenance-kit/post-launch/retrospective.md
+- [x] maintenance-kit/gates/GATE-05-release.md
+- [x] maintenance-kit/gates/GATE-06-launch.md
+- [x] maintenance-kit/gates/GATE-07-continue.md
 
 ## M11 — State Protocol + Memory + Scripts (building-kit)
-- [ ] building-kit/memory/framework-digest.md
-- [ ] building-kit/memory/session-snapshot-template.md
-- [ ] building-kit/memory/cloud-handover-template.md
-- [ ] building-kit/memory/session-learning-template.md
-- [ ] building-kit/memory/adr-template.md
-- [ ] building-kit/memory/retrospective-template.md
-- [ ] building-kit/skill-file-format.md
+- [x] building-kit/memory/framework-digest.md
+- [x] building-kit/memory/session-snapshot-template.md
+- [x] building-kit/memory/cloud-handover-template.md
+- [x] building-kit/memory/session-learning-template.md
+- [x] building-kit/memory/adr-template.md
+- [x] building-kit/memory/retrospective-template.md
+- [x] building-kit/skill-file-format.md
 - [x] building-kit/scripts/generate-codebase-index.js
-- [ ] building-kit/scripts/generate-skill-index.js
-- [ ] building-kit/scripts/generate-context-package.js
-- [ ] building-kit/scripts/index-runner.js
+- [x] building-kit/scripts/generate-skill-index.js
+- [x] building-kit/scripts/generate-context-package.js
+- [x] building-kit/scripts/index-runner.js
 - [x] building-kit/ci-cd/github-actions-test.yml
-- [ ] building-kit/ci-cd/README.md
+- [x] building-kit/ci-cd/README.md
 
 ## M12 — Update Kit + Final Polish
-- [ ] update-kit/README.md
-- [ ] All internal links verified
-- [ ] Version stamp: PDF v1.0.0 on all files
-- [ ] Zero agent-specific syntax in core files
-- [ ] Build Handoff → AGENT.md validation
+- [x] update-kit/README.md
+- [x] All internal links verified — agent names only in harness-adapters/ and session-management.md (legitimate)
+- [x] Version stamp: PDF v1.0.0 on 95/104 files (9 exempt: utility prompts, top-level docs, planning templates)
+- [x] Zero agent-specific syntax leakage in core framework files
+- [x] Build Handoff → AGENT.md pipeline confirmed intact

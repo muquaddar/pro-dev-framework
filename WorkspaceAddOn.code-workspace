@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../geo-tag-pro"
+		},
+		{
+			"path": "../../scanner-pro"
+		}
+	],
+	"settings": {}
+}

@@ -72,7 +72,7 @@ pro-dev-framework/
 │   │   ├── 03 through 11            — Stages 0-2 methodology
 │   │   ├── 12-phase-prd.md            — PRD Synthesis (Phase 7)
 │   │   ├── 13-output-formats.md      — Exact file templates per stage
-│   │   └── 14-build-handoff.md       — Final AGENT.md + package generator
+│   │   └── 14-build-handoff-template.md — Final AGENT.md + package generator
 │   ├── templates/                    — Output templates (saved to project)
 │   │   ├── stakeholder-map.md        — Stakeholder register + RACI
 │   │   ├── work-streams.md           — Parallel stream tracker + deps
@@ -86,7 +86,7 @@ pro-dev-framework/
 │   ├── MASTER-GUIDE.md               — The definitive framework reference
 │   ├── AGENT.md                      — Project brain template
 │   ├── harness-adapters/             — Agent-specific shims
-│   ├── phase-prompts/                — IDE-based planning (alternative)
+│   ├── phase-prompts/                — Reserved for future IDE-based planning prompts
 │   ├── gates/                        — Human approval checkpoints (1-4)
 │   ├── rules/                        — Code, process, & session rules
 │   ├── rule-templates/               — Stack-specific conventions
