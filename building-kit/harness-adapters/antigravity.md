@@ -164,3 +164,44 @@ Antigravity stores curated knowledge across conversations. This means:
 | Sequential tool execution | Some operations slower than parallel | Plan file edits to minimize calls |
 | Browser tool requires running server | Can't test static files directly | Use `npm run dev` or equivalent first |
 | Planning mode may trigger unnecessary plans | Agent may over-plan simple tasks | Say "don't plan, just do it" for trivial changes |
+| **No script-hook surface** | **Cannot fire Layer 1 hooks on tool boundaries** | **Use Layer 2 (AI instructions) + Layer 3 (git hooks). See "Hooks" below.** |
+
+---
+
+## Hooks — Layer 2 + Layer 3 (Required for PDF Compliance)
+
+Antigravity has no `settings.json`-style hook surface. The agent runs the same generic scripts in-turn via `run_command` (Layer 2), backstopped by git hooks (Layer 3).
+
+### Wire Layer 2 — AI instructions in AGENT.md
+
+Append to the project's `AGENT.md` "Active Hooks" section:
+
+```markdown
+## Active Hooks (Layer 2)
+
+Run these via `run_command` at the matching trigger.
+
+| Trigger | run_command | When |
+|---|---|---|
+| First user prompt of session | `node pro-dev-framework/building-kit/hooks/scripts/session-start.js` | Before any view_file call |
+| After every write_to_file / replace_file_content | `node pro-dev-framework/building-kit/hooks/scripts/update-progress.js --file <path>` | Immediately |
+| Every 3 file modifications | `node pro-dev-framework/building-kit/hooks/scripts/check-drift.js --threshold 3` | Self-counter |
+| After write on docs/*.md | `node pro-dev-framework/building-kit/hooks/scripts/validate-doc.js --file <path>` | Immediately |
+| Reaching any gate (2/3/4/5) | `node pro-dev-framework/building-kit/hooks/scripts/gate-check.js --gate N` | Before presenting gate form |
+| Editing auth/crypto/secret files | `node pro-dev-framework/building-kit/hooks/scripts/gate-check.js --gate 3 --scan` | Immediately |
+| Session end (switch / done / context full) | `node pro-dev-framework/building-kit/hooks/scripts/capture-session-state.js` | Before final response |
+
+Detail per hook: see `pro-dev-framework/building-kit/hooks/instructions/`.
+```
+
+### Wire Layer 3 — git hooks (universal)
+
+```bash
+bash pro-dev-framework/building-kit/hooks/git-hooks/install.sh
+```
+
+### Antigravity-specific notes
+
+- **Knowledge Items overlap:** Antigravity's persistent KIs may already store some context that the session snapshot also captures. The hook scripts complement KIs — KIs cover *patterns and conventions*, the snapshot covers *what changed in this session*. Keep both.
+- **Browser-subagent hooks:** When `browser_subagent` is used to verify a UI change, log the verification by passing `--task "verified [feature] in browser"` to `update-progress.js`.
+- **search_web during build:** When research mid-task adds a new dependency, the per-edit hook flags it via `check-drift.js --check deps`. The agent should pause and confirm with the human before proceeding.

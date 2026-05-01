@@ -156,3 +156,46 @@ Stop after completing all 4 and run drift detection."
 | Auto-execution risk | May skip human gates | Always run in interactive mode near gate boundaries |
 | Limited context memory | May forget earlier context | Session snapshots bridge the gap |
 | No image generation | Can't produce UI assets | Use planning docs' HTML prototypes |
+| **No script-hook surface** | **Cannot fire Layer 1 hooks on tool boundaries** | **Use Layer 2 (AI instructions) + Layer 3 (git hooks). See "Hooks" below.** |
+
+---
+
+## Hooks — Layer 2 + Layer 3 (Required for PDF Compliance)
+
+Codex has no `settings.json`-style hook surface. Instead, the agent runs the same generic scripts in-turn (Layer 2), backstopped by git hooks that fire regardless of agent (Layer 3).
+
+### Wire Layer 2 — AI instructions in AGENTS.md
+
+Append to the project's `AGENTS.md` shim:
+
+```markdown
+## Active Hooks (Layer 2)
+
+You MUST run these scripts at the matching trigger. They keep session state and drift detection in sync.
+
+| Trigger | Run | When |
+|---|---|---|
+| First user prompt | `node pro-dev-framework/building-kit/hooks/scripts/session-start.js` | Before reading any project file |
+| After every Edit/Write | `node pro-dev-framework/building-kit/hooks/scripts/update-progress.js --file <path>` | Immediately after the tool call |
+| Every 3 edits | `node pro-dev-framework/building-kit/hooks/scripts/check-drift.js --threshold 3` | Self-counter |
+| After Edit/Write on docs/*.md | `node pro-dev-framework/building-kit/hooks/scripts/validate-doc.js --file <path>` | Immediately |
+| Reaching any gate (2/3/4/5) | `node pro-dev-framework/building-kit/hooks/scripts/gate-check.js --gate N` | Before presenting gate form |
+| Editing auth/crypto/secret/* | `node pro-dev-framework/building-kit/hooks/scripts/gate-check.js --gate 3 --scan` | Immediately |
+| Session end (switch/done) | `node pro-dev-framework/building-kit/hooks/scripts/capture-session-state.js` | Before final response |
+
+Detail per hook: see `pro-dev-framework/building-kit/hooks/instructions/`.
+```
+
+### Wire Layer 3 — git hooks (universal)
+
+```bash
+bash pro-dev-framework/building-kit/hooks/git-hooks/install.sh
+```
+
+Catches anything missed in-session: doc validation, secret leaks, lint failures, manifest sync.
+
+### Codex-specific notes
+
+- **Sandbox mode:** All hook scripts use Node stdlib only — no network calls — so they work fine inside Codex's network-restricted sandbox.
+- **Autonomous mode:** When Codex runs in autonomous mode, the Layer 2 instructions in AGENTS.md are part of its system context. Codex should still execute them between tasks. If you observe drift (Codex skipping hooks), drop back to interactive mode for the affected milestone.
+- **Bypass:** Codex sometimes runs a batch of edits in one tool call. The per-edit hook may need to be invoked once at the end of the batch with `--file <last-file>`. The drift check still functions correctly because it counts unique edited files in `active.jsonl`.

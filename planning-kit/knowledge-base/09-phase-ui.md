@@ -44,7 +44,7 @@ BITE 4: Asset Briefs                    (5-10 min)
 
 BITE 5: Styled Prototype                (10-15 min)
   Upgrade the lo-fi prototype with real styling
-  Output: hi-fi prototype.html with design system applied
+  Output: `p_19_prototype-styled.html` with design system applied
 ```
 
 Each bite follows: **AI Proposes → Human Reviews → AI Refines → Human Confirms → SAVE**.
@@ -629,13 +629,13 @@ This is the closest you'll get to the final app without writing code.
 Share this with stakeholders for final visual approval."
 ```
 
-**Save as:** `docs/prototype/prototype-styled.html`
+**Save as:** `p_19_prototype-styled.html`
 
 ---
 
 ## Complete Deliverable
 
-**File:** `docs/ui-design-brief.md`
+**File:** `p_18_ui-design-brief.md`
 
 ```markdown
 ---
@@ -668,7 +668,7 @@ confirmed_by: "human"
 ```
 
 **Additional files:**
-- `docs/prototype/prototype-styled.html` — hi-fi clickable prototype
+- `p_19_prototype-styled.html` — hi-fi clickable prototype
 - `docs/assets/` — directory for collected reference images
 
 **Save-As-You-Go checkpoints:**
@@ -677,8 +677,8 @@ After Bite 1 → Save design direction section
 After Bite 2 → Save design tokens section
 After Bite 3 → Save component specs section
 After Bite 4 → Save asset briefs section
-After Bite 5 → Save docs/prototype/prototype-styled.html
-After all    → Save complete docs/ui-design-brief.md
+After Bite 5 → Save `p_19_prototype-styled.html`
+After all    → Save complete `p_18_ui-design-brief.md`
 ```
 
 ---

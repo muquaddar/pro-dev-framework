@@ -296,7 +296,7 @@ MARKET TIMING
 **Mitigations:** [How to address blockers]
 ```
 
-**Save as:** `docs/feasibility-assessment.md`
+**Save as:** `p_01_feasibility-assessment.md`
 
 ---
 
@@ -333,7 +333,7 @@ Map the existing market. Lite tier can skip this.
 - [ ] Platform play (ecosystem, not just product)
 ```
 
-**Save as:** `docs/competitive-matrix.md`
+**Save as:** `p_02_competitive-matrix.md`
 
 ---
 
@@ -423,7 +423,7 @@ This prompt is intentionally aggressive. A strong idea will survive the scrutiny
 
 After completing all 6 steps, save the combined output:
 
-**File:** `docs/idea-validation-brief.md`
+**File:** `p_03_idea-validation-brief.md`
 
 **Contents:**
 ```markdown

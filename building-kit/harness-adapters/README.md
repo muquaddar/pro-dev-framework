@@ -135,3 +135,19 @@ You can use different agents for different milestones or tasks. The Universal St
 3. Agent B continues from where Agent A left off
 
 The shim files (CLAUDE.md, AGENTS.md) ensure every agent finds AGENT.md regardless of which file it auto-reads.
+
+---
+
+## Hooks — Agent-Agnostic Event Wiring
+
+Each adapter has a **Hooks** section that documents how the universal building-kit events (session-start, session-end, per-edit, drift-check, gate, etc.) map to that agent's native trigger surface. The underlying scripts in [`hooks/scripts/`](../hooks/scripts/) are identical across agents — only the wiring differs.
+
+| Layer | Mechanism | Available on |
+|---|---|---|
+| **Layer 1 — Script hooks** | Harness fires a script on a tool-call boundary | Claude Code (`settings.json`) |
+| **Layer 2 — AI instructions** | Agent runs the script in-turn per AGENT.md rules | All other agents |
+| **Layer 3 — Git/cron** | Triggered out-of-band by git or scheduler | All agents (universal) |
+
+For setup, see [hook-setup-guide.md](../hook-setup-guide.md). For the universal event catalog, see [hooks/events.md](../hooks/events.md). For tier presets, see [hooks/presets/](../hooks/presets/).
+
+**Key property:** A project wired with Lite-tier hooks has the same on-disk effects (snapshots, progress updates, drift flags, manifest sync) regardless of which agent did the work. This is what makes mid-project agent switching safe.

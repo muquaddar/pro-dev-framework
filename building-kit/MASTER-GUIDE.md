@@ -31,6 +31,7 @@ This guide teaches any AI coding agent (or human) the complete Pro Dev Framework
 | Stage 1 | `### Stage 1: Stakeholder Discovery` | Atomic deep dives, work streams |
 | Stage 2 | `### Stage 2: Interactive Planning` | 7 phases × 4 sub-steps |
 | Stage 3 | `### Stage 3: Scaffold` | Walking Skeleton, first commit |
+| Stage 3.5 | `### Stage 3.5: Wire Hooks` | Event-driven automation setup |
 | Stage 4 | `### Stage 4: Build` | Milestone workflow, drift checks |
 | Stage 5 | `### Stage 5: Verify` | Testing, quality scorecard |
 | Stage 6 | `### Stage 6: Launch Preparation` | Beta, app store, compliance |
@@ -40,6 +41,7 @@ This guide teaches any AI coding agent (or human) the complete Pro Dev Framework
 | Tokens | `## Token Optimization` | 3-tier index, reading budget |
 | Skills | `## Skill System` | Skill format, discovery chain, auto-index |
 | Switching | `## Switch Protocol` | Session end, handover generation |
+| Hooks | `## Hooks — Event-Driven Automation` | Three-layer hook architecture, presets |
 | Project Brain | `## AGENT.md — The Project Brain` | What AGENT.md contains |
 | Kit Reference | `## Quick Reference: Which Kit` | Which kit for which task |
 | Methods | `## Methodology Sources` | McKinsey, ThoughtWorks, Deloitte |
@@ -278,6 +280,46 @@ Step 6: COMMIT
 ```
 
 **This is always Milestone M1.** No exceptions.
+
+---
+
+### Stage 3.5: Wire Hooks
+
+**Kit:** building-kit | **Where:** IDE Agent + git | **Duration:** 10-30 min (one-time)
+**Methodology:** `building-kit/hook-setup-guide.md`
+
+Between scaffolding and building, wire event-driven hooks so the disciplines that follow (session save, drift check, doc validation, gate readiness, security-edit detection) fire automatically instead of depending on the agent to remember.
+
+```
+Step 1: DETECT HARNESS
+  Claude Code | Codex | Antigravity | OpenCode | Generic
+
+Step 2: PICK TIER PRESET
+  Lite (3 hooks)        — solo dev, weekend project
+  Standard (8 hooks)    — multi-week product, real gates
+  Enterprise (12+ hooks) — compliance, audit, multi-agent
+
+Step 3: APPLY LAYER 1 (HARNESS-NATIVE SCRIPT HOOKS)
+  Claude Code only — paste settings.json snippet from preset
+  Other agents     — skip to Step 4
+
+Step 4: APPLY LAYER 2 (AI-INSTRUCTION HOOKS)
+  Append "Active Hooks" section to AGENT.md per harness adapter
+
+Step 5: APPLY LAYER 3 (GIT HOOKS — UNIVERSAL)
+  bash building-kit/hooks/git-hooks/install.sh
+
+Step 6: VERIFY
+  Run session-start.js → simulate edit → capture-session-state.js
+  Confirm memory/sessions/[date]-[agent].md was written
+
+Step 7: DOCUMENT
+  Active Hooks table is already in AGENT.md template
+```
+
+**Why this is its own stage:** Skipping this means every Stage 4 task carries the agent-discipline tax. Wiring it once eliminates the entire class of "agent forgot to write a snapshot" failures.
+
+**Skip when:** One-shot script you'll never revisit, or sandboxed evaluator with no filesystem persistence. Otherwise, do it.
 
 ---
 
@@ -704,6 +746,49 @@ If user tries to close without triggering the switch protocol:
 
 ---
 
+## Hooks — Event-Driven Automation
+
+The framework defines several disciplines the agent must remember (write a session snapshot, drift-check every 3 tasks, validate planning docs, surface security-sensitive edits). Hooks move that responsibility off the agent by firing the matching script automatically on the triggering event.
+
+### Three Layers
+
+```
+Layer 1 — Harness-native script hooks
+  Fires deterministically on tool-call boundaries.
+  Available on: Claude Code (settings.json hooks).
+  Calls scripts/*.js. No agent involvement.
+
+Layer 2 — AI-instruction hooks
+  Markdown rules in AGENT.md / harness adapter that the agent
+  follows during its turn.
+  Available on: every agent. Calls the same scripts/*.js.
+  Less reliable than Layer 1 but works everywhere.
+
+Layer 3 — Out-of-band triggers
+  Git hooks (.git/hooks/pre-commit, post-commit) and cron.
+  Available on: every project. Fires regardless of agent.
+```
+
+### Universal Event Catalog (Summary)
+
+| Category | Examples | Default script |
+|---|---|---|
+| Session boundary | session-start, session-end, dormancy resume | `session-start.js`, `capture-session-state.js` |
+| Task & drift | per-edit, every-3-task drift, file-size, new-dep | `update-progress.js`, `check-drift.js` |
+| Gate & milestone | Gate 2/3/4/5/6/7 readiness | `gate-check.js` |
+| Code & commit | pre-commit, post-commit, milestone-tag | `git-hooks/*` |
+| Planning & doc | doc edited, AGENT.md edited, ADR added | `validate-doc.js` |
+
+Full catalog: `building-kit/hooks/events.md`. Tier presets: `building-kit/hooks/presets/`. Setup walkthrough: `building-kit/hook-setup-guide.md`.
+
+### Why Hooks Are Agent-Agnostic
+
+The same scripts, the same on-disk effects, regardless of which agent did the work. Switching mid-project from Claude Code to Antigravity does not change what's in `memory/sessions/`, what's in `docs/manifest.md`, or how drift is recorded. The harness adapter for each agent translates the universal events into that agent's native trigger surface — but the underlying behavior is identical.
+
+This is the property that makes multi-agent workflows safe.
+
+---
+
 ## AGENT.md — The Project Brain
 
 After scaffolding, `AGENT.md` is the ONLY file the agent reads at session start. It contains:
@@ -763,6 +848,8 @@ After scaffolding, `AGENT.md` is the ONLY file the agent reads at session start.
 | Start building in an IDE | building-kit | AGENT.md + activation-prompt-template.md |
 | Understand the full system | building-kit | This file (MASTER-GUIDE.md) |
 | Add a harness adapter | building-kit | harness-adapters/README.md |
+| Wire event-driven hooks | building-kit | hook-setup-guide.md |
+| Pick a hook tier preset | building-kit | hooks/presets/[lite\|standard\|enterprise].md |
 | Find a skill for a task | building-kit | [skills-dir]/ROOT_INDEX.md |
 | Create a new skill | building-kit | skill-file-format.md |
 | Rebuild skill indexes | building-kit | scripts/generate-skill-index.js |

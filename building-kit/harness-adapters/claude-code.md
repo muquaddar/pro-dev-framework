@@ -133,3 +133,68 @@ Begin by reading AGENT.md now.
 3. **Use `TodoWrite` for progress** — Map to `docs/progress.md` updates
 4. **Leverage multi-file edits** — Claude Code excels at coordinated changes across files
 5. **Trust the AGENT.md** — Don't re-read MASTER-GUIDE.md after scaffolding; AGENT.md has everything needed
+
+---
+
+## Hooks — Layer 1 Native (Recommended)
+
+Claude Code is the only harness with a native script-hook surface (`settings.json` → `SessionStart` / `Stop` / `PreToolUse` / `PostToolUse` / `UserPromptSubmit`). This means every PDF discipline (session save, drift check, doc validation, progress sync) can fire deterministically without relying on the agent to remember.
+
+### Wiring (Standard Tier — 8 hooks)
+
+Add to `.claude/settings.json` in the project root:
+
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [{ "type": "command", "command": "node pro-dev-framework/building-kit/hooks/scripts/session-start.js" }] }
+    ],
+    "Stop": [
+      { "hooks": [{ "type": "command", "command": "node pro-dev-framework/building-kit/hooks/scripts/capture-session-state.js" }] }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          { "type": "command", "command": "node pro-dev-framework/building-kit/hooks/scripts/update-progress.js" },
+          { "type": "command", "command": "node pro-dev-framework/building-kit/hooks/scripts/check-drift.js --threshold 3" },
+          { "type": "command", "command": "node pro-dev-framework/building-kit/hooks/scripts/validate-doc.js" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+For Lite (3 hooks) or Enterprise (12+ hooks) configs, see [hooks/presets/](../hooks/presets/).
+
+### Event → Surface Mapping
+
+| Building-Kit Event | Claude Code Surface | Script |
+|---|---|---|
+| session-start | `SessionStart` | `session-start.js` |
+| session-end | `Stop` | `capture-session-state.js` |
+| task-complete / file-edit | `PostToolUse` matcher `Edit\|Write` | `update-progress.js` |
+| drift-check (every 3 edits) | `PostToolUse` matcher `Edit\|Write` (counter inside script) | `check-drift.js --threshold 3` |
+| planning-doc-edited | `PostToolUse` matcher on `docs/*.md` | `validate-doc.js` |
+| security-edit (Gate 3) | `PostToolUse` with path filter | `gate-check.js --gate 3 --scan` |
+| pre-commit | git pre-commit (Layer 3) | `git-hooks/pre-commit` |
+| gate boundary | AI instruction (Layer 2) | `gate-check.js --gate N` |
+
+### Verify hooks loaded
+
+Inside Claude Code:
+```
+/hooks
+```
+
+Should list every hook from your `settings.json`.
+
+### Disable temporarily
+
+```bash
+mv .claude/settings.json .claude/settings.json.disabled
+```
+
+Restore by renaming back. Layer 3 git hooks remain active either way.

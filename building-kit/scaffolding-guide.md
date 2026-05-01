@@ -96,7 +96,28 @@ git add -A
 git commit -m "chore: initial project scaffold"
 ```
 
-### 11. Start Milestone 1
+### 11. Wire Hooks (Stage 3.5)
+
+Before starting Milestone 1, wire event-driven hooks so session save / drift check / doc validation fire automatically. Full walkthrough: `hook-setup-guide.md`. Quick steps:
+
+```bash
+# Layer 3 (universal — always install)
+bash pro-dev-framework/building-kit/hooks/git-hooks/install.sh
+
+# Layer 1 (Claude Code only — paste from preset)
+mkdir -p .claude
+# Copy snippet from hooks/presets/[lite|standard|enterprise].md into .claude/settings.json
+
+# Layer 2 (every other agent — already in AGENT.md template's "Active Hooks" section)
+# Verify the table matches your tier; trim rows you're not using.
+
+# Verify
+node pro-dev-framework/building-kit/hooks/scripts/session-start.js
+node pro-dev-framework/building-kit/hooks/scripts/capture-session-state.js
+ls memory/sessions/   # should show today's snapshot
+```
+
+### 12. Start Milestone 1
 You're ready. Follow the session workflow from `MASTER-GUIDE.md` and trigger **GATE-02: Milestone Start Approval**.
 
 ---

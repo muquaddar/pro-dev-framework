@@ -458,7 +458,7 @@ For EVERY screen, define:
 
 ## Complete Deliverable
 
-**File:** `docs/ux-flows.md`
+**File:** `p_13_ux-flows.md`
 
 ```markdown
 ---
@@ -630,7 +630,7 @@ For IDE agents: Generate the HTML files directly into the project's docs/ folder
 For Cloud AI: Output the HTML code in a code block for the user to save.
 ```
 
-**Save as:** `docs/diagrams/navigation-flow.html`, `docs/diagrams/user-journey.html`, `docs/diagrams/state-diagram.html`
+**Save as:** `p_14_navigation-flow.html`, `p_15_user-journey.html`, `p_16_state-diagram.html`
 
 ---
 
@@ -931,7 +931,7 @@ For Cloud AI: Output complete HTML in code blocks for user to save
   This is the cheapest usability test possible.
 ```
 
-**Save as:** `docs/prototype/prototype.html`, `docs/diagrams/`
+**Save as:** `p_17_prototype.html`, `p_14_navigation-flow.html`, `p_15_user-journey.html`, `p_16_state-diagram.html`
 
 **Save-As-You-Go checkpoints:**
 ```
@@ -939,9 +939,9 @@ After Bite 1 → Save screen map section
 After Bite 2 → Save user journeys section
 After Bite 3 → Save screen wireframes
 After Bite 4 → Save state coverage
-After Bite 5 → Save docs/diagrams/*.html (3 files)
-After Bite 6 → Save docs/prototype/prototype.html + screen size notes
-After all    → Save complete docs/ux-flows.md
+After Bite 5 → Save `p_14_navigation-flow.html`, `p_15_user-journey.html`, `p_16_state-diagram.html`
+After Bite 6 → Save `p_17_prototype.html`
+After all    → Save complete `p_13_ux-flows.md`
 ```
 
 ---

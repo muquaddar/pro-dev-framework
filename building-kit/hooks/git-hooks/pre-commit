@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# PDF building-kit pre-commit hook (Layer 3, harness-independent).
+#
+# Install:
+#   cp pro-dev-framework/building-kit/hooks/git-hooks/pre-commit .git/hooks/pre-commit
+#   chmod +x .git/hooks/pre-commit
+#
+# Effects:
+#   1. Runs validate-doc.js on staged docs/*.md and AGENT.md (strict).
+#   2. Greps staged diff for likely secrets — blocks if found.
+#   3. Runs lint if `npm run lint` exists, otherwise skips.
+#
+# Exit non-zero blocks the commit. To bypass once (not recommended):
+#   git commit --no-verify
+
+set -e
+
+ROOT="$(git rev-parse --show-toplevel)"
+SCRIPTS="$ROOT/pro-dev-framework/building-kit/hooks/scripts"
+
+# Fall back if framework lives elsewhere
+if [ ! -d "$SCRIPTS" ]; then
+  SCRIPTS="$(find "$ROOT" -type d -name scripts -path "*/building-kit/hooks/scripts" 2>/dev/null | head -1)"
+fi
+
+# 1. Validate staged docs and AGENT.md
+STAGED_DOCS="$(git diff --cached --name-only --diff-filter=ACM | grep -E '^(docs/.*\.md|AGENT\.md)$' || true)"
+if [ -n "$STAGED_DOCS" ] && [ -d "$SCRIPTS" ]; then
+  for f in $STAGED_DOCS; do
+    if [ "$f" = "AGENT.md" ]; then
+      node "$SCRIPTS/validate-doc.js" "$ROOT" --agent-md --strict || exit 1
+    else
+      node "$SCRIPTS/validate-doc.js" "$ROOT" --file "$f" --strict || exit 1
+    fi
+  done
+fi
+
+# 2. Secret scan (best-effort; extend patterns per project)
+SECRETS_RE='(AKIA[0-9A-Z]{16}|-----BEGIN (RSA|OPENSSH) PRIVATE KEY-----|sk_live_[0-9a-zA-Z]{24,}|ghp_[0-9a-zA-Z]{36}|xox[baprs]-[0-9a-zA-Z-]{10,})'
+if git diff --cached -U0 | grep -E "$SECRETS_RE" > /dev/null; then
+  echo "✗ pre-commit: possible secret in staged diff. Aborting."
+  echo "  Pattern: $SECRETS_RE"
+  echo "  Bypass once with: git commit --no-verify"
+  exit 1
+fi
+
+# 3. Lint (optional — skipped if not configured)
+if [ -f "$ROOT/package.json" ] && grep -q '"lint"' "$ROOT/package.json"; then
+  ( cd "$ROOT" && npm run lint --silent ) || exit 1
+fi
+
+echo "✓ pre-commit: docs validated, no secrets, lint clean"

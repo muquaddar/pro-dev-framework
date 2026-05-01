@@ -21,7 +21,7 @@ This guide explains how the planning phase works. It is the **first file the clo
 
 ## The Planning Phase
 
-Planning covers **Stages -1 through 2** of the Pro Dev Framework:
+Planning covers **Stages -1 through 3** of the Pro Dev Framework:
 
 ```
 Stage -1: Idea Exploration & Validation
@@ -33,8 +33,11 @@ Stage 0: Environment & Project Setup
 Stage 1: Stakeholder Discovery & Deep Dives
   └── Who is involved? What do they need? Work streams.
 
-Stage 2: Interactive Planning (7 Phases)
+Stage 2: Product Planning (7 Phases)
   └── Discovery → Strategy → UX → UI → Architecture → Security → PRD Synthesis
+
+Stage 2.5: Launch & Scale Planning (4 Phases)
+  └── Testing & QA → Launch & GTM → Operations & Team → Iteration & Feedback
 ```
 
 Each stage builds on the previous one. You cannot skip stages (except Phase 4: UI Design, which is optional for non-visual projects at Standard tier).
@@ -106,6 +109,8 @@ Every planning phase follows this interaction pattern:
 ---
 
 ## Stage Sequence
+
+**NOTE:** The Planning Kit now follows the **44-File Protocol**, including both Product Planning Phases (1-7) and Launch & Scale Phases (8-11).
 
 ### Stage -1: Idea Exploration & Validation
 
@@ -216,6 +221,45 @@ Phase 7: PRD Synthesis (all tiers)
 
 ---
 
+### Stage 2.5: Launch & Scale Planning (4 Phases)
+
+**Methodology files:** `15-phase-testing-qa.md` through `18-phase-iteration-feedback.md`
+
+```
+Phase 8: Testing & QA Strategy (all tiers)
+  → Test pyramid, coverage targets, QA timeline, monitoring, release checklist
+  → Deliverables: docs/testing-strategy.md, docs/qa-plan.md, docs/monitoring-setup.md, docs/release-checklist.md
+
+Phase 9: Launch & Go-to-Market (all tiers)
+  → Pre-launch marketing timeline, launch day execution, post-launch growth, contingencies
+  → Deliverables: docs/gtm-timeline.md, docs/launch-day-plan.md, docs/post-launch-growth.md, docs/contingency-plan.md
+
+Phase 10: Operations & Team Structure (all tiers)
+  → Org chart, hiring timeline, communication plan, decision-making framework, documentation standards
+  → Deliverables: docs/org-chart.md, docs/hiring-plan.md, docs/communication-plan.md, docs/decision-making-framework.md
+
+Phase 11: Post-Launch Iteration & Feedback (all tiers)
+  → Feedback loops, metrics dashboard, version roadmap, technical debt management
+  → Deliverables: docs/feedback-loops.md, docs/metrics-dashboard.md, docs/version-roadmap.md, docs/technical-debt-plan.md
+```
+
+**Facilitator behavior:** Continue the 4-sub-step loop. These phases shift focus from product design to operational execution. Ensure user understands these are launch-readiness checks, not just nice-to-have planning.
+
+---
+
+## Planning Phase Expansion
+
+The original PDF v1.0.0 covered Phases 1-7 (Product Planning). These new phases extend the framework to cover:
+
+- **Phase 8:** Quality assurance before launch
+- **Phase 9:** Market entry and growth strategy
+- **Phase 10:** Organizational structure and team operations
+- **Phase 11:** Continuous improvement and sustainability
+
+These phases are **not optional**. They should be completed before or concurrent with the Build phase to ensure a launch-ready, operationally sound product.
+
+---
+
 ## Save-As-You-Go Model
 
 The cloud AI guides the user to **save each deliverable immediately after it's confirmed.** This prevents session loss from destroying hours of planning.
@@ -248,18 +292,18 @@ Once saved, say 'saved' and we'll continue to [next step]."
   PLANNING PROGRESS & SAVED FILES
 
   Stage -1: Idea Validation
-    ✅ docs/idea-validation-brief.md    SAVED
-    ✅ docs/feasibility-assessment.md   SAVED
+    ✅ `p_01_feasibility-assessment.md`  SAVED
+    ✅ `p_03_idea-validation-brief.md`    SAVED
 
   Stage 0: Environment
-    ✅ docs/project-config.md           SAVED
+    ✅ `p_04_project-config.md`           SAVED
 
   Stage 1: Stakeholders
-    ✅ docs/stakeholder-map.md          SAVED
-    ✅ docs/stakeholders/content.md     SAVED
-    ✅ docs/stakeholders/legal.md       SAVED
-    🔵 docs/stakeholders/marketing.md  IN PROGRESS
-    ⬜ docs/work-streams.md            PENDING
+    ✅ `p_05_stakeholder-map.md`          SAVED
+    ✅ `p_06_product-owner.md`            SAVED
+    ✅ `p_06_lead-dev.md`                 SAVED
+    🔵 `p_07_work-streams.md`             IN PROGRESS
+    ⬜ `p_08_cross-stream-deps.md`        PENDING
 
   Stage 2: Planning Phases
     ⬜ Phase 1-6                       NOT STARTED
@@ -319,6 +363,7 @@ The AI outputs each piece with exact filenames and content, following the save-a
 
 These files contain the detailed methodology for each stage and phase. The AI reads them on-demand as the user progresses:
 
+### Core Planning Guide & Pre-Phase
 | File | Stage | When to Read |
 |---|---|---|
 | `01-planning-guide.md` | — | **This file.** Read first, always. |
@@ -326,12 +371,28 @@ These files contain the detailed methodology for each stage and phase. The AI re
 | `03-environment-setup.md` | 0 | When starting environment setup |
 | `04-stakeholder-discovery.md` | 1 | When starting stakeholder work |
 | `05-stakeholder-deep-dive.md` | 1 | When doing individual deep dives |
-| `06-phase-discovery.md` | 2.1 | When starting Phase 1 |
-| `07-phase-strategy.md` | 2.2 | When starting Phase 2 |
-| `08-phase-ux.md` | 2.3 | When starting Phase 3 |
-| `09-phase-ui.md` | 2.4 | When starting Phase 4 |
-| `10-phase-architecture.md` | 2.5 | When starting Phase 5 |
-| `11-phase-compliance.md` | 2.6 | When starting Phase 6 |
-| `12-phase-prd.md` | 2.7 | When starting Phase 7 (PRD Synthesis) |
+
+### Stage 2: Product Planning Phases (1-7)
+| File | Phase | When to Read |
+|---|---|---|
+| `06-phase-discovery.md` | 1 | When starting Phase 1 (Discovery) |
+| `07-phase-strategy.md` | 2 | When starting Phase 2 (Strategy) |
+| `08-phase-ux.md` | 3 | When starting Phase 3 (UX Flows) |
+| `09-phase-ui.md` | 4 | When starting Phase 4 (UI Design) |
+| `10-phase-architecture.md` | 5 | When starting Phase 5 (Architecture) |
+| `11-phase-compliance.md` | 6 | When starting Phase 6 (Compliance) |
+| `12-phase-prd.md` | 7 (Synthesis) | When starting Phase 7 (PRD Synthesis) |
+
+### Stage 3: Launch & Scale Phases (7-10)
+| File | Phase | When to Read |
+|---|---|---|
+| `15-phase-testing-qa.md` | 8 | When starting Phase 8 (Testing & QA) |
+| `16-phase-launch-marketing.md` | 9 | When starting Phase 9 (Launch & GTM) |
+| `17-phase-operations-team.md` | 10 | When starting Phase 10 (Operations & Team) |
+| `18-phase-iteration-feedback.md` | 11 | When starting Phase 11 (Iteration & Feedback) |
+
+### Reference & Handoff
+| File | Purpose | When to Read |
+|---|---|---|
 | `13-output-formats.md` | All | Reference for exact output templates |
 | `14-build-handoff-template.md` | End | When generating the build handoff |

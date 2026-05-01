@@ -323,7 +323,7 @@ Identify where streams depend on each other. These dependencies are CRITICAL —
 - Update this map when work stream statuses change
 ```
 
-**Save as:** appended to `docs/work-streams.md` or kept in `docs/cross-stream-deps.md`
+**Save as:** `p_08_cross-stream-deps.md`
 
 ---
 
@@ -331,10 +331,10 @@ Identify where streams depend on each other. These dependencies are CRITICAL —
 
 | File | Contents | Save Location |
 |---|---|---|
-| Stakeholder Map | Identification table + priorities | `docs/stakeholder-map.md` |
-| Deep Dive Briefs | One per stakeholder | `docs/stakeholders/[role-name].md` |
-| Work Streams | All streams + milestones | `docs/work-streams.md` |
-| RACI Matrix | Enterprise only | Included in `docs/stakeholder-map.md` |
+| Stakeholder Map | Identification table + priorities | `p_05_stakeholder-map.md` |
+| Deep Dive Briefs | One per stakeholder | `p_06_[stakeholder-role].md` |
+| Work Streams | All streams + milestones | `p_07_work-streams.md` |
+| RACI Matrix | Enterprise only | Included in `p_05_stakeholder-map.md` |
 
 **After completing this stage:** proceed to Stage 2 (Interactive Planning).
 
@@ -345,10 +345,10 @@ Identify where streams depend on each other. These dependencies are CRITICAL —
 If doing this on a cloud platform, save after each sub-step:
 
 ```
-After Step 1 → Save docs/stakeholder-map.md (identification table)
-After each Step 3 dive → Save docs/stakeholders/[name].md
-After Step 4 → Save docs/work-streams.md
-After Step 5 → Append deps to docs/work-streams.md
+After Step 1 → Save `p_05_stakeholder-map.md` (identification table)
+After each Step 3 dive → Save `p_06_[stakeholder-role].md`
+After Step 4 → Save `p_07_work-streams.md`
+After Step 5 → Save `p_08_cross-stream-deps.md`
 ```
 
 This protects against session loss. If the cloud session crashes, you don't lose completed deep dives.

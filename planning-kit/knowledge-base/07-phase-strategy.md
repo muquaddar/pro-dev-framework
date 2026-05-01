@@ -507,7 +507,7 @@ Don't wait until M10 to discover your architecture doesn't work offline.
 
 ## Complete Deliverable
 
-**File:** `docs/strategy.md`
+**File:** `p_11_strategy.md`
 
 ```markdown
 ---
@@ -534,20 +534,22 @@ confirmed_by: "human"
 
 ## Milestone Plan
 [From Bite 3 — or link to docs/milestone-plan.md]
+[From Bite 3 — or link to docs/p_12_milestone-plan.md]
 
 ## Risk Register
 [From Bite 4 — ranked risks with mitigations + milestone mapping]
 ```
 
-Also save:
-- `docs/milestone-plan.md` — full quick win details
+**Additional files:**
+- `p_12_milestone-plan.md` — standalone milestone document
 
 **Save-As-You-Go checkpoints:**
 ```
-After Bite 1 → Save technology stack section
-After Bite 2 → Save business model section
-After Bite 3 → Save docs/milestone-plan.md
-After Bite 4 → Save complete docs/strategy.md
+After Bite 1 → Save Stack Selection to `p_11_strategy.md`
+After Bite 2 → Save Milestone Roadmap to `p_11_strategy.md`
+After Bite 3 → Save Risk Register to `p_11_strategy.md`
+After Bite 4 → Save `p_12_milestone-plan.md`
+After all    → Final confirmation of `p_11_strategy.md`
 ```
 
 ---

@@ -68,8 +68,8 @@ revision_count: 2                       # Times human requested refinement befor
 
 # ── Outputs Produced ───────────────────────────────────────
 linked_assets:                          # Files THIS phase created (relative to docs/)
-  - "prototype/wireframe-lofi.html"
-  - "diagrams/navigation-flow.html"
+  - "p_17_prototype.html"
+  - "p_14_navigation-flow.html"
 
 # ── Key Decisions (Dashboard Cards) ────────────────────────
 key_decisions:                          # Major choices made during this phase
@@ -245,16 +245,16 @@ This is the **single source of truth** the dashboard webapp reads per project. T
 
   "assets": {
     "diagrams": [
-      "diagrams/system-map.html",
-      "diagrams/data-model.html"
+      "p_21_architecture.html",
+      "p_22_data-model.html"
     ],
     "prototypes": [
-      "prototype/wireframe-lofi.html",
-      "prototype/prototype-styled.html"
+      "p_17_prototype.html",
+      "p_19_prototype-styled.html"
     ],
     "stakeholders": [
-      "stakeholders/stakeholder-map.md",
-      "stakeholders/work-streams.md"
+      "p_05_stakeholder-map.md",
+      "p_07_work-streams.md"
     ]
   }
 }
@@ -473,14 +473,14 @@ confirmed_by: "human"
 
 ## 1. System Architecture
 **Pattern:** [e.g., Feature-First Clean Architecture]
-[Link to docs/diagrams/system-map.html]
+[Link to `p_21_architecture.html`]
 
 ## 2. Data Model
 | Entity | Attributes | Relationships |
 |---|---|---|
 | [Name] | [Fields] | [Links] |
 
-[Link to docs/diagrams/data-model.html]
+[Link to `p_22_data-model.html`]
 
 ## 3. Project Structure
 **Root Structure:**

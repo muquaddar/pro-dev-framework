@@ -186,7 +186,7 @@ our product should focus to win. Which pain points to solve,
 which audiences to target, what differentiates us.]
 ```
 
-**Save as:** Include in `docs/requirements.md` as the opening section, or save separately as `docs/platform-research.md` for reference.
+**Save as:** `p_10_requirements.md` as the opening section, or save separately as `docs/p_11_platform_research.md` for reference.
 
 ### 🧑 Suggested Human Activities (Optional but High-Value)
 
@@ -508,7 +508,7 @@ timeline/effort impact. No silent scope creep.
 
 ## Complete Deliverable
 
-**File:** `docs/requirements.md`
+**File:** `p_10_requirements.md`
 
 ```markdown
 ---
@@ -528,7 +528,7 @@ confirmed_by: "human"
 # Requirements — [PROJECT_NAME]
 
 ## Platform Research Findings
-[From Bite 1 — or link to docs/platform-research.md]
+[From Bite 1 — or link to docs/p_11_platform_research.md]
 
 ## Personas
 [From Bite 2 — 2-4 data-driven personas]
@@ -557,10 +557,12 @@ confirmed_by: "human"
 
 **Save-As-You-Go checkpoints:**
 ```
-After Bite 1 → Save platform research (docs/platform-research.md)
-After Bite 2 → Save personas section
-After Bite 3 → Save requirements section
-After Bite 5 → Save complete docs/requirements.md
+After Bite 1 → Save Project Background to `p_10_requirements.md`
+After Bite 2 → Save Core Constraints to `p_10_requirements.md`
+After Bite 3 → Save Scope Definition to `p_10_requirements.md`
+After Bite 4 → Save User Personas to `p_10_requirements.md`
+After Bite 5 → Save Success Metrics to `p_10_requirements.md`
+After all    → Final confirmation of `p_10_requirements.md`
 ```
 
 ---

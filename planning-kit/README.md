@@ -29,13 +29,17 @@ planning-kit/
    Go to `platform-setup/` and follow the setup guide for your preferred AI (ChatGPT, Claude, or Gemini). You will inject `system-prompt.md` as the core behavior.
 
 2. **Run Through the Phases**
-   The AI Facilitator will lead you through 6 strictly gated phases:
+   The AI Facilitator will lead you through 10 strictly gated phases:
    - Phase 1: Context & Discovery
    - Phase 2: Technical Strategy
    - Phase 3: UX & User Flows
    - Phase 4: UI Design Brief
    - Phase 5: Architecture & Data
    - Phase 6: Security & Compliance
+   - Phase 7: Testing & QA Strategy
+   - Phase 8: Launch & Go-to-Market Strategy
+   - Phase 9: Operations & Team Structure
+   - Phase 10: Post-Launch Iteration & Feedback Loops
 
 3. **Confirm & Assemble**
    After each phase, save the output markdown files into your project's `docs/` directory.

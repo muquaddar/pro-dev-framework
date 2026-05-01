@@ -203,7 +203,7 @@ graph TB
 
 The AI renders this as an HTML file (same pattern as Phase 3, Bite 5).
 
-**Save as:** `docs/diagrams/architecture.html`
+**Save as:** `p_21_architecture.html`
 
 ---
 
@@ -552,7 +552,7 @@ M1 is DONE when:
 
 ## Complete Deliverable
 
-**File:** `docs/architecture.md`
+**File:** `p_20_architecture.md`
 
 ```markdown
 ---
@@ -585,17 +585,17 @@ confirmed_by: "human"
 ```
 
 **Additional files:**
-- `docs/walking-skeleton-spec.md` — standalone spec for M1
-- `docs/diagrams/architecture.html` — Mermaid rendered architecture diagram
-- `docs/diagrams/data-model.html` — Mermaid rendered ER diagram
+- `p_23_walking-skeleton-spec.md` — standalone spec for M1
+- `p_21_architecture.html` — Mermaid rendered architecture diagram
+- `p_22_data-model.html` — Mermaid rendered ER diagram
 
 **Save-As-You-Go checkpoints:**
 ```
-After Bite 1 → Save architecture section + diagram HTML
-After Bite 2 → Save data model section + ER diagram HTML
-After Bite 3 → Save docs/walking-skeleton-spec.md
+After Bite 1 → Save architecture section + `p_21_architecture.html`
+After Bite 2 → Save data model section + `p_22_data-model.html`
+After Bite 3 → Save `p_23_walking-skeleton-spec.md`
 After Bite 4 → Save project structure section
-After all    → Save complete docs/architecture.md
+After all    → Save complete `p_20_architecture.md`
 ```
 
 ---

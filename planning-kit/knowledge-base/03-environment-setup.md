@@ -14,7 +14,7 @@ Now that the idea is validated, establish the foundation for the project. This s
 - A defined technology stack
 - A clear project identity
 - Resource and constraint boundaries
-- A `docs/project-config.md` file capturing all decisions
+- A `p_04_project-config.md` file capturing all decisions
 
 ---
 
@@ -240,7 +240,7 @@ Map what you're working with — and what you're NOT working with.
 
 Combine all four steps into a single config file:
 
-**File:** `docs/project-config.md`
+**File:** `p_04_project-config.md`
 
 ```markdown
 ---

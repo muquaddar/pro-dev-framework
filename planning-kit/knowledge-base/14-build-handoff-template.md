@@ -32,14 +32,14 @@ STEP 3: Provide the Activation Prompt      (Given to Human)
 Before generating the handoff, the AI acting as the Planning Facilitator must silently check that all required deliverables exist and are tagged `Status: Confirmed`.
 
 **Checklist:**
-- `docs/prd.md`
-- `docs/requirements.md`
-- `docs/strategy.md`
-- `docs/ux-flows.md`
-- `docs/ui-design-brief.md`
-- `docs/architecture.md`
-- `docs/compliance.md`
-- `docs/walking-skeleton-spec.md`
+- `p_29_prd.md`
+- `p_10_requirements.md`
+- `p_11_strategy.md`
+- `p_13_ux-flows.md`
+- `p_18_ui-design-brief.md`
+- `p_20_architecture.md`
+- `p_27_compliance.md`
+- `p_23_walking-skeleton-spec.md`
 
 If anything is missing or unconfirmed, the AI halts and says: 
 *"Wait! We haven't finalized `[Document]`. Let's finish that before handing off to the IDE."*
@@ -57,22 +57,22 @@ Instead of forcing the IDE to read all files at once (which blows up context lim
 ```markdown
 # Project Documentation Index
 
-**Start Here:** `docs/walking-skeleton-spec.md` contains the exact scope for Milestone 1. Do not build anything else until M1 is approved.
+**Start Here:** `p_23_walking-skeleton-spec.md` contains the exact scope for Milestone 1. Do not build anything else until M1 is approved.
 
 | Concept | Look Here |
 |---|---|
-| Product Overview (human-readable) | `docs/prd.md` |
-| Tech Stack & Architecture | `docs/architecture.md` |
-| Feature Scope (M1 vs M2) | `docs/requirements.md` |
-| UI Tokens (Colors, Typography) | `docs/ui-design-brief.md` |
-| UX Data Flow | `docs/ux-flows.md` |
-| Security/Privacy Rules | `docs/compliance.md` |
+| Product Overview (human-readable) | `p_29_prd.md` |
+| Tech Stack & Architecture | `p_20_architecture.md` |
+| Feature Scope (M1 vs M2) | `p_10_requirements.md` |
+| UI Tokens (Colors, Typography) | `p_18_ui-design-brief.md` |
+| UX Data Flow | `p_13_ux-flows.md` |
+| Security/Privacy Rules | `p_27_compliance.md` |
 ```
 
-### 2. The `AGENT.md` Base
+### 2. The `p_32_AGENT.md` Base
 The AI generates the initial contents of the `AGENT.md` file (the "persistent brain" for the building kit). 
 
-**Format for `AGENT.md` initialization**:
+**Format for `p_32_AGENT.md` initialization**:
 ```xml
 <context>
   <project_name>[PROJECT_NAME]</project_name>
@@ -82,7 +82,7 @@ The AI generates the initial contents of the `AGENT.md` file (the "persistent br
 </context>
 
 <rules>
-  - Read `docs/walking-skeleton-spec.md` before writing code.
+  - Read `p_23_walking-skeleton-spec.md` before writing code.
   - No cloud sync allowed in v1.0.
   - Max file size: 200 lines.
 </rules>
@@ -111,9 +111,9 @@ The AI gives the human the final instruction block. The human will paste this EX
 --------- PASTE THIS INTO YOUR IDE AI ---------
 
 Initialize Project Build.
-1. Read `AGENT.md` at the root. Do not process anything else until you read it.
-2. Read `docs/index.md` to map your context.
-3. Read `docs/walking-skeleton-spec.md` to get your exact scope.
+1. Read `p_32_AGENT.md` at the root. Do not process anything else until you read it.
+2. Read `p_31_index.md` to map your context.
+3. Read `p_23_walking-skeleton-spec.md` to get your exact scope.
 4. Explain to me what you are about to build for M1, wait for my confirmation, and then begin scaffolding.
 
 -----------------------------------------------

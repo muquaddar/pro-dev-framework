@@ -150,3 +150,54 @@ This ensures OpenCode loads project context automatically on every session start
 | Model-dependent quality | Small models may produce poor output | Use large models for critical milestones |
 | Limited multi-file coordination | May struggle with large refactors | Break work into smaller, focused tasks |
 | Community-driven updates | Feature set may change between versions | Pin to a stable version for project duration |
+| **No script-hook surface** | **Cannot fire Layer 1 hooks on tool boundaries** | **Use Layer 2 (AI instructions) + Layer 3 (git hooks). See "Hooks" below.** |
+
+---
+
+## Hooks — Layer 2 + Layer 3 (Required for PDF Compliance)
+
+OpenCode has no native script-hook surface. The agent runs the generic scripts in-turn via the terminal tool (Layer 2), backstopped by git hooks (Layer 3).
+
+### Wire Layer 2 — AI instructions in AGENTS.md
+
+Append to the project's `AGENTS.md` shim:
+
+```markdown
+## Active Hooks (Layer 2)
+
+Run these via terminal at the matching trigger.
+
+| Trigger | Run | When |
+|---|---|---|
+| First user prompt | `node pro-dev-framework/building-kit/hooks/scripts/session-start.js` | Before reading project files |
+| After every Edit/Write | `node pro-dev-framework/building-kit/hooks/scripts/update-progress.js --file <path>` | Immediately |
+| Every 3 edits | `node pro-dev-framework/building-kit/hooks/scripts/check-drift.js --threshold 3` | Self-counter |
+| After Edit/Write on docs/*.md | `node pro-dev-framework/building-kit/hooks/scripts/validate-doc.js --file <path>` | Immediately |
+| Reaching any gate (2/3/4/5) | `node pro-dev-framework/building-kit/hooks/scripts/gate-check.js --gate N` | Before presenting gate form |
+| Session end (switch / done) | `node pro-dev-framework/building-kit/hooks/scripts/capture-session-state.js` | Before final response |
+
+Detail per hook: see `pro-dev-framework/building-kit/hooks/instructions/`.
+```
+
+### Wire Layer 3 — git hooks (universal)
+
+```bash
+bash pro-dev-framework/building-kit/hooks/git-hooks/install.sh
+```
+
+### OpenCode config integration
+
+OpenCode supports a project config file. Add the hook scripts to its instructions block so the model is reminded of them on every turn:
+
+```json
+{
+  "instructions": "Read AGENT.md for project context. Follow PDF v1.0.0. Run hooks listed in AGENTS.md 'Active Hooks (Layer 2)' at their matching triggers.",
+  "context": ["AGENT.md", "AGENTS.md", "docs/progress.md"]
+}
+```
+
+### Model-tier notes
+
+- **Large models** (Claude 3.5+, GPT-4o): reliable Layer 2 hook execution.
+- **Medium models** (GPT-4o-mini, Claude Haiku): may skip the per-edit hook under load. Increase reliance on Layer 3 git hooks (pre-commit catches doc validation) and run `check-drift.js` manually at gate boundaries.
+- **Small / local models**: not recommended for hook-driven workflows; the model often forgets to invoke scripts. Use Layer 3 + manual session-end discipline instead.

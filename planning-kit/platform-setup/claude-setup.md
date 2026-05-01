@@ -80,7 +80,7 @@ The instructions should start with:
  ✅  stakeholder-progress.md  ← used during stakeholder deep-dives
 ```
 
-**From `planning-kit/knowledge-base/` (14 files):**
+**From `planning-kit/knowledge-base/` (18 files):**
 
 ```
  ✅  01-planning-guide.md
@@ -95,13 +95,17 @@ The instructions should start with:
  ✅  10-phase-architecture.md
  ✅  11-phase-compliance.md
  ✅  12-phase-prd.md
+ ✅  07-phase-testing-qa.md      ← NEW (Phase 7: Testing & QA)
+ ✅  08-phase-launch-marketing.md ← NEW (Phase 8: Launch & GTM)
+ ✅  09-phase-operations-team.md  ← NEW (Phase 9: Operations & Team)
+ ✅  10-phase-iteration-feedback.md ← NEW (Phase 10: Iteration & Feedback)
  ✅  13-output-formats.md
  ✅  14-build-handoff-template.md
 ```
 
-> **Important:** Upload ALL 18 files (1 rules + 3 templates + 14 knowledge-base). The facilitator references them by filename. Missing files will cause skipped phases, wrong formats, or validation failures. **Do not upload** `README.md` — it's human setup docs, not methodology.
+> **Important:** Upload ALL 22 files (1 rules + 1 overview + 4 templates + 18 knowledge-base). The facilitator references them by filename. Missing files will cause skipped phases, wrong formats, or validation failures. **Do not upload** `README.md` or individual phase guides in root — they're human setup docs, not methodology.
 
-> **Size limits:** Claude Projects support up to 200K tokens of project knowledge. 18 markdown files total ~60K tokens — well within limits.
+> **Size limits:** Claude Projects support up to 200K tokens of project knowledge. 22 markdown files total ~85K tokens — well within limits (including the new Phase 7-10 files).
 
 ---
 
@@ -110,7 +114,11 @@ The instructions should start with:
 After uploading, you should see:
 - ✅ Project name: `PDF Planning Facilitator`
 - ✅ Project instructions: System prompt pasted
-- ✅ Project knowledge: 18 files listed (rules.md, 3 templates, 14 knowledge-base)
+- ✅ Project knowledge: 22 files listed
+  - 1 rules.md
+  - 1 PHASES-OVERVIEW.md (NEW)
+  - 3 templates (stakeholder-map.md, work-streams.md, stakeholder-progress.md)
+  - 18 knowledge-base files (01-planning-guide.md through 14-build-handoff-template.md, including the 4 new phase files 07-10)
 
 There are no additional capability toggles needed — Claude Projects don't have separate capability switches like ChatGPT.
 

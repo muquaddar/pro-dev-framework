@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+# PDF building-kit post-commit hook (Layer 3, harness-independent).
+#
+# Install:
+#   cp pro-dev-framework/building-kit/hooks/git-hooks/post-commit .git/hooks/post-commit
+#   chmod +x .git/hooks/post-commit
+#
+# Effects:
+#   1. Updates docs/manifest.md with the latest commit SHA + tracked-file count.
+#   2. Logs the commit to memory/hooks.log.
+#   3. If commit is on a milestone tag (M[N]-*), runs gate-check.js --gate 4.
+
+set -e
+
+ROOT="$(git rev-parse --show-toplevel)"
+SCRIPTS="$ROOT/pro-dev-framework/building-kit/hooks/scripts"
+
+if [ ! -d "$SCRIPTS" ]; then
+  SCRIPTS="$(find "$ROOT" -type d -name scripts -path "*/building-kit/hooks/scripts" 2>/dev/null | head -1)"
+fi
+
+SHA="$(git rev-parse --short HEAD)"
+MSG="$(git log -1 --pretty=%s)"
+COUNT="$(git ls-files | wc -l | tr -d ' ')"
+DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+# 1. Update docs/manifest.md (idempotent: replace HOOK-MANAGED block)
+MANIFEST="$ROOT/docs/manifest.md"
+mkdir -p "$ROOT/docs"
+if [ ! -f "$MANIFEST" ]; then
+  cat > "$MANIFEST" <<EOF
+# Project Manifest
+
+<!-- HOOK:MANIFEST:START -->
+- Last commit: \`$SHA\` — $MSG
+- Tracked files: $COUNT
+- Updated: $DATE
+<!-- HOOK:MANIFEST:END -->
+EOF
+else
+  awk -v s="$SHA" -v m="$MSG" -v c="$COUNT" -v d="$DATE" '
+    BEGIN { skip=0 }
+    /<!-- HOOK:MANIFEST:START -->/ {
+      print
+      print "- Last commit: `" s "` — " m
+      print "- Tracked files: " c
+      print "- Updated: " d
+      skip=1
+      next
+    }
+    /<!-- HOOK:MANIFEST:END -->/ { skip=0 }
+    skip==0 { print }
+  ' "$MANIFEST" > "$MANIFEST.tmp" && mv "$MANIFEST.tmp" "$MANIFEST"
+fi
+
+# 2. Log
+mkdir -p "$ROOT/memory"
+echo "{\"ts\":\"$DATE\",\"script\":\"post-commit\",\"sha\":\"$SHA\",\"msg\":\"$(echo "$MSG" | sed 's/"/\\"/g')\"}" >> "$ROOT/memory/hooks.log"
+
+# 3. Milestone tag → gate 4
+TAG="$(git tag --points-at HEAD | head -1 || true)"
+if [ -n "$TAG" ] && echo "$TAG" | grep -qE '^M[0-9]+-'; then
+  if [ -d "$SCRIPTS" ]; then
+    node "$SCRIPTS/gate-check.js" "$ROOT" --gate 4 --milestone "${TAG%%-*}" || true
+  fi
+fi
+
+echo "✓ post-commit: manifest updated"

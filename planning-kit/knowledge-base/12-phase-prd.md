@@ -11,7 +11,7 @@
 
 Phases 1–6 produce **six separate documents**, each optimized for AI-driven, bite-sized collaboration. But human stakeholders — clients, managers, investors, team leads — need a **single master document** they can read end-to-end, review with their team, and formally approve.
 
-**Phase 7: PRD Synthesis** consolidates the confirmed planning outputs into one **Product Requirements Document (PRD)**: `docs/prd.md`.
+**Phase 7: PRD Synthesis** consolidates the confirmed planning outputs into one **Product Requirements Document (PRD)**: `p_29_prd.md`.
 
 This document is:
 - **Human-first:** Written for stakeholders, not AI agents.
@@ -32,8 +32,8 @@ This document is:
 ❌ IS NOT:
   • A replacement for the 6 phase documents
   • A copy-paste of all phase content into one file
-  • A technical spec (that's architecture.md)
-  • An agent-facing document (that's AGENT.md)
+  • A technical spec (that's `p_20_architecture.md`)
+  • An agent-facing document (that's `p_32_AGENT.md`)
 ```
 
 ---
@@ -73,7 +73,7 @@ User explicitly approves. The AI outputs the final PRD with `status: confirmed` 
 ```text
 "✅ PRD is ready. Please save it now:
 
-📁 File: docs/prd.md
+📁 File: `p_29_prd.md`
 📋 Copy the content below and save it in your project's docs/ folder.
 
 [CONTENT BLOCK]

@@ -54,6 +54,8 @@
 
 **Session Rules.** At session START: read this file → read latest session snapshot → read progress.md → announce position. At session END: write session snapshot → update Current State below → update progress.md → if switching platforms, run Switch Protocol (ask target → save state → generate handover).
 
+**Hook Rules.** This project may have hooks wired (see "Active Hooks" section below). If so, the matching script runs automatically (Layer 1 on Claude Code) or you MUST run it in-turn (Layer 2 on every other agent) at the trigger. Hook scripts are pure Node, no deps, no network, exit 0 on non-fatal errors — they never block you. Skipping a Layer 2 hook is the same as skipping the discipline it automates.
+
 **Skills.** Check Skill Pointers below for the skills directory. Discovery: ROOT_INDEX → domain index → specific skill. Never read all skills. Search only when encountering unfamiliar tech or stuck on a pattern. Capture new skills during development via knowledge-capture-template.
 
 **Work Streams.** Code isn't the only stream. Check cross-stream dependencies before starting any milestone. Content and Asset streams run in parallel. Use docs/work-streams.md for status.
@@ -67,20 +69,28 @@
 <!--
   This block is updated by EVERY agent at EVERY session end.
   It must remain machine-parseable. Keep the exact format below.
+
+  The block between HOOK:CURRENT-STATE markers is rewritten by
+  hooks/scripts/capture-session-state.js — do not hand-edit
+  fields inside the markers; edit fields outside them.
 -->
 
 - **Stage:** [N] — [STAGE_NAME]
 - **Milestone:** M[N] — [MILESTONE_NAME]
 - **Tasks:** [X/Y] complete
 - **Tier:** [Lite | Standard | Enterprise]
-- **Last Agent:** [agent-name, e.g., Antigravity, Claude Code, ChatGPT]
-- **Last Session:** [memory/sessions/YYYY-MM-DD-agent.md]
 - **Blocking:** [none | gate-N | dependency-description]
 - **Work Streams:**
   - CODE: M[N] — [X/Y] tasks
   - CONTENT: C[N] — [status]
   - ASSET: A[N] — [status]
   - LEGAL: L[N] — [status]
+
+<!-- HOOK:CURRENT-STATE:START -->
+- **Last Agent:** [agent-name]
+- **Last Session:** [memory/sessions/YYYY-MM-DD-agent.md]
+- **Last Updated:** [YYYY-MM-DDTHH:MM:SSZ]
+<!-- HOOK:CURRENT-STATE:END -->
 
 ---
 
@@ -166,6 +176,12 @@ Shims (at least one for your agent):
 - [ ] CLAUDE.md (for Claude Code)
 - [ ] AGENTS.md (for Codex / OpenAI agents)
 - [ ] .gemini/settings.json or AGENT.md in root (for Antigravity)
+
+Hooks (Stage 3.5 — wired before Stage 4 starts):
+- [ ] Layer 2 instructions present in this file's "Active Hooks" section
+- [ ] Layer 3 git hooks installed (.git/hooks/pre-commit, post-commit)
+- [ ] Layer 1 settings.json hooks (Claude Code only — optional)
+- [ ] Verified end-to-end (session-start.js → capture-session-state.js produces snapshot)
 ```
 
 ---
@@ -279,6 +295,52 @@ Shims (at least one for your agent):
 - **Phase Prompts:** [path]/building-kit/phase-prompts/phase-0N.md (for IDE-based planning only)
 - **Content Kit:** [path]/content-creation-kit/
 - **Maintenance Kit:** [path]/maintenance-kit/
+
+---
+
+## Active Hooks
+
+<!--
+  Wired during Stage 3.5 (see building-kit/hook-setup-guide.md).
+  Lists every hook active on this project so agents and humans both
+  know what fires automatically.
+
+  Pick the tier preset that matches Project Tier above:
+  - Lite      → 3 hooks  (session-start, session-end, per-edit)
+  - Standard  → 8 hooks  (+ drift, doc-validate, gate, pre/post-commit)
+  - Enterprise→ 12+ hooks (+ security-edit, cron drift, milestone-tag, Gate 7)
+
+  The script names below stay the same regardless of agent. Only the
+  invocation channel (Layer 1/2/3) varies. Agents on Layer 2 MUST run
+  the script in-turn at the matching trigger; on Layer 1 (Claude Code)
+  the harness fires it for you.
+-->
+
+| Layer | Trigger | Script | Notes |
+|---|---|---|---|
+| 1 | SessionStart | `hooks/scripts/session-start.js` | Claude Code only |
+| 1 | Stop | `hooks/scripts/capture-session-state.js` | Claude Code only |
+| 1 | PostToolUse Edit\|Write | `hooks/scripts/update-progress.js` | Claude Code only |
+| 1 | PostToolUse Edit\|Write (every 3) | `hooks/scripts/check-drift.js --threshold 3` | Claude Code only — Standard+ |
+| 2 | First user prompt of session | `hooks/scripts/session-start.js` | All other agents |
+| 2 | After every Edit/Write | `hooks/scripts/update-progress.js --file <path>` | All other agents |
+| 2 | Every 3 edits | `hooks/scripts/check-drift.js --threshold 3` | All other agents — Standard+ |
+| 2 | After Edit/Write on docs/*.md | `hooks/scripts/validate-doc.js --file <path>` | All agents — Standard+ |
+| 2 | Reaching any gate (2/3/4/5) | `hooks/scripts/gate-check.js --gate N` | All agents — Standard+ |
+| 2 | Editing auth/crypto/secret files | `hooks/scripts/gate-check.js --gate 3 --scan` | All agents — Enterprise |
+| 2 | Session end (switch / done) | `hooks/scripts/capture-session-state.js` | All other agents |
+| 3 | git pre-commit | `hooks/git-hooks/pre-commit` | All agents — Standard+ |
+| 3 | git post-commit | `hooks/git-hooks/post-commit` | All agents — Standard+ |
+| 3 | cron every 30 min | `hooks/scripts/check-drift.js --interval` | All agents — Enterprise |
+
+**Disable temporarily** (debugging only):
+- Layer 1: `mv .claude/settings.json .claude/settings.json.disabled`
+- Layer 2: remove this section from AGENT.md
+- Layer 3: `chmod -x .git/hooks/pre-commit .git/hooks/post-commit`
+
+**Hook log:** `memory/hooks.log` (one JSON line per fire)
+**Setup guide:** `[path-to-pro-dev-framework]/building-kit/hook-setup-guide.md`
+**Per-hook detail:** `[path-to-pro-dev-framework]/building-kit/hooks/instructions/`
 
 ---
 

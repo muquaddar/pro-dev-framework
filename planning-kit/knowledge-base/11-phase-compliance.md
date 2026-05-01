@@ -40,7 +40,7 @@ BITE 3: Accessibility & Constraints    (5-10 min)
 
 BITE 4: Final Compliance Sign-off      (5-10 min)
   Bringing it all together for human review
-  Output: Complete docs/compliance.md
+  Output: Complete `p_27_compliance.md`
 ```
 
 Each bite follows: **AI Proposes → Human Reviews → AI Refines → Human Confirms → SAVE**.
@@ -101,7 +101,7 @@ Based on the Data Model (Phase 5), the AI identifies any PII and proposes 2-3 pr
 └────────────────────────────────────────────────────────────┘
 ```
 
-**Save as:** `docs/compliance/privacy-strategy.md`
+**Save as:** `p_24_privacy-strategy.md`
 
 ---
 
@@ -137,7 +137,7 @@ The AI lists the top 3-5 threats to the architecture and how to mitigate them:
 | Bot traffic on APIs | High | Implement rate limiting + reCAPTCHA on public endpoints. |
 | Malicious ad SDKs | High | Do not include third-party ad networks (ad-free model). |
 
-**Save as:** `docs/compliance/security-model.md`
+**Save as:** `p_25_security-model.md`
 
 ---
 
@@ -164,7 +164,7 @@ The AI documents adaptation rules for every screen type:
 | 600 - 899px | Tablet (Portrait) | Single column, wider margins. Larger tap targets. |
 | 900+ px | Tablet (Landscape)/Desktop| Grid layouts (2+ columns). Sidebar navigation instead of bottom bar. |
 
-**Save as:** `docs/compliance/accessibility-constraints.md`
+**Save as:** `p_26_accessibility-constraints.md`
 
 ---
 
@@ -177,7 +177,7 @@ The AI groups the decisions into an actionable checklist for the IDE agent.
 
 ### Complete Deliverable
 
-**File:** `docs/compliance.md`
+**File:** `p_27_compliance.md`
 
 ```markdown
 ---
@@ -213,14 +213,14 @@ confirmed_by: "human"
 ```
 
 **Additional formats generated:**
-- `docs/diagrams/security-flow.html` — Interactive sequence diagram.
+- `p_28_security-flow.html` — Interactive sequence diagram.
 
 **Save-As-You-Go checkpoints:**
 ```
-After Bite 1 → Save docs/compliance/privacy-strategy.md
-After Bite 2 → Save docs/compliance/security-model.md + diagram HTML
-After Bite 3 → Save docs/compliance/accessibility-constraints.md
-After Bite 4 → Save complete docs/compliance.md
+After Bite 1 → Save `p_24_privacy-strategy.md`
+After Bite 2 → Save `p_25_security-model.md` + `p_28_security-flow.html`
+After Bite 3 → Save `p_26_accessibility-constraints.md`
+After Bite 4 → Save complete `p_27_compliance.md`
 ```
 
 ---
