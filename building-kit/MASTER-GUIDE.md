@@ -26,16 +26,9 @@ This guide teaches any AI coding agent (or human) the complete Pro Dev Framework
 | Section | Search For | What You'll Find |
 |---|---|---|
 | Overview | `## The Platform-Split Architecture` | Why planning goes on cloud, building in IDE |
-| Stage -1 | `### Stage -1: Idea Exploration` | Hypothesis loop, Go/No-Go |
-| Stage 0 | `### Stage 0: Environment` | Tier selection, project identity |
-| Stage 1 | `### Stage 1: Stakeholder Discovery` | Atomic deep dives, work streams |
-| Stage 2 | `### Stage 2: Interactive Planning` | 7 phases × 4 sub-steps |
-| Stage 3 | `### Stage 3: Scaffold` | Walking Skeleton, first commit |
-| Stage 3.5 | `### Stage 3.5: Wire Hooks` | Event-driven automation setup |
-| Stage 4 | `### Stage 4: Build` | Milestone workflow, drift checks |
-| Stage 5 | `### Stage 5: Verify` | Testing, quality scorecard |
-| Stage 6 | `### Stage 6: Launch Preparation` | Beta, app store, compliance |
-| Stage 7 | `### Stage 7: Post-Launch Operations` | Monitoring, feedback, iteration |
+| Gates PL_0-7 | `### Planning Gates (PL_0 to PL_7)` | Strategic planning, discovery, architecture |
+| Gates BL_M* | `### Building Gates (BL_M1 to BL_M[N])` | Agile sprints, dynamic milestones |
+| Gates OP_1-4 | `### Operations Gates (OP_1 to OP_4)` | Launch readiness, maintenance, ops |
 | Tiers | `## Project Tiers` | Lite / Standard / Enterprise settings |
 | Gates | `## Human Gates` | All 7 gates, triggers, tier rules |
 | Tokens | `## Token Optimization` | 3-tier index, reading budget |
@@ -67,22 +60,17 @@ The framework separates **planning** from **building** because they require fund
 
 ```
 PLANNING (Cloud AI — ChatGPT / Gemini / Claude.ai)
-  Stages -1 through 2
+  Gates PL_0 through PL_7
   Uses: planning-kit/
-  Output: Planning Package (15+ docs saved to project folder)
+  Output: Planning Package (44+ docs saved to project folder)
 
 BUILDING (IDE Agent — Antigravity / Claude Code / Codex CLI / OpenCode)
-  Stages 3 through 5
+  Gates BL_M1 through BL_M[N]
   Uses: building-kit/
   Input: AGENT.md + planning docs
 
-CONTENT (Any platform — parallel to building)
-  Runs alongside Stages 3-5
-  Uses: content-creation-kit/
-  Tracked via: Work Streams in AGENT.md
-
-LAUNCH & MAINTENANCE (IDE + Manual)
-  Stages 6 through 7
+OPERATIONS & MAINTENANCE (IDE + Manual)
+  Gates OP_1 through OP_4
   Uses: maintenance-kit/
 ```
 
@@ -90,9 +78,9 @@ Users who prefer to do everything in one IDE agent can skip the split. The build
 
 ---
 
-## The 8-Stage Lifecycle
+## The 16-Gate Lifecycle
 
-### Stage -1: Idea Exploration & Validation
+### Planning Gates (PL_0 to PL_7)
 
 **Kit:** planning-kit | **Where:** Cloud AI | **Duration:** 30 min – 2 hours
 **Methodology:** `planning-kit/knowledge-base/02-idea-validation.md`
@@ -489,23 +477,18 @@ Step 5: RETROSPECTIVE
 
 ## Human Gates
 
-| Gate | Stage | Trigger | Decision |
+| Kit | Gate | Goal | Decision Point |
 |---|---|---|---|
-| **Go/No-Go** | After -1 | Idea validation complete | GO / PIVOT / KILL |
-| **Gate 1** | After 2 | Planning complete | Approve architecture |
-| **Gate 2** | During 4 | Before each milestone | Approve milestone scope |
-| **Gate 3** | During 4 | Agent detects security-sensitive code | Approve approach |
-| **Gate 4** | After 5 | Milestone verification done | Accept milestone |
-| **Gate 5** | During 6 | Pre-release checks done | Approve release |
-| **Gate 6** | During 6 | All streams green | Approve launch (Enterprise) |
-| **Gate 7** | During 7 | Quarterly review | Continue / Sunset (Enterprise) |
+| **Planning** | **PL_0 to PL_7** | Strategic Alignment → Handoff | Approve each planning milestone |
+| **Building** | **BL_M1 to BL_M[N]** | Agile Sprints | Approve each milestone completion |
+| **Operations** | **OP_1 to OP_4** | Content → Readiness → Ops → Maint | Approve launch and operational state |
 
 **Gate rules:**
 - Agent STOPS and presents a gate form. Never auto-proceeds.
 - Gate form contains: what was done, what's next, risks, and a clear decision to make.
-- Lite tier: Only Go/No-Go + Gate 1.
-- Standard: Go/No-Go + Gates 1, 2, 4, 5.
-- Enterprise: All 7.
+- Lite tier: Only 4 gates (PL_0, PL_1, BL_M1, OP_2).
+- Standard: 10 gates (PL_0-PL_5, BL_*, OP_1-OP_3).
+- Enterprise: All 16 gates.
 
 ---
 

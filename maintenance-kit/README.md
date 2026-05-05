@@ -1,6 +1,6 @@
 # Maintenance Kit
 
-> **Version:** PDF v1.0.0 | **Kit:** Maintenance | **Stages:** 6–7
+> **Version:** PDF v1.1.0 | **Kit:** Operations & Maintenance | **Gates:** OP_1–OP_4
 
 ---
 
@@ -12,10 +12,12 @@ Most developers stop at the build phase. The Maintenance Kit ensures your projec
 
 The two stages in this kit:
 
-| Stage | Name | When | Focus |
-|---|---|---|---|
-| **Stage 6** | Launch Preparation | Before public release | Compliance, beta testing, store submission, go-to-market |
-| **Stage 7** | Post-Launch Operations | After public release | Monitoring, feedback, iteration, sustainability |
+| Gate | Name | Focus |
+|---|---|---|
+| **OP_1** | Content Strategy | Content audit, creative assets, copy strategy |
+| **OP_2** | Launch Readiness | Pre-flight checks, store submission, GTM strategy |
+| **OP_3** | Operations & Support | Monitoring, support manual, organizational structure |
+| **OP_4** | Maintenance & Iteration | Stability, debt management, versioning, roadmap |
 
 ---
 
@@ -38,22 +40,25 @@ maintenance-kit/
 │
 ├── README.md                          ← You are here
 │
-├── launch-prep/                       ← Stage 6: Before public release
+├── content/                           ← OP_1: Content Strategy
+│   └── p_45_content-audit.md          — Content audit, creative assets, copy strategy
+│
+├── launch-prep/                       ← OP_2: Launch readiness
+│   ├── p_46_launch-readiness.md       — Pre-flight checks, store submission, GTM strategy
 │   ├── beta-test-plan.md              — Beta program design and execution
 │   ├── app-store-submission.md        — Store listing, screenshots, review prep
 │   ├── go-to-market.md                — Marketing launch plan and timeline
 │   └── compliance-final.md            — Final compliance verification before launch
 │
-├── post-launch/                       ← Stage 7: After public release
+├── operations/                        ← OP_3: Operations & Support
+│   ├── p_47_ops-manual.md             — Monitoring, support manual, organizational structure
 │   ├── monitoring-setup.md            — Error tracking, analytics, alerting
-│   ├── feedback-collection.md         — User feedback pipelines and issue triage
-│   ├── iteration-workflow.md          — Feature request → planning → build mini-cycle
-│   └── retrospective.md              — Project retrospective template
+│   └── feedback-collection.md         — User feedback pipelines and issue triage
 │
-└── gates/                             ← Human approval checkpoints
-    ├── GATE-05-release.md             — Pre-release approval (human decision)
-    ├── GATE-06-launch.md              — Launch readiness (all streams green)
-    └── GATE-07-continue.md            — Quarterly continue / sunset decision
+└── maintenance/                       ← OP_4: Maintenance & Iteration
+    ├── p_48_maintenance-plan.md       — Stability, debt management, versioning, roadmap
+    ├── iteration-workflow.md          — Feature request → planning → build mini-cycle
+    └── retrospective.md               — Project retrospective template
 ```
 
 ---
@@ -83,10 +88,10 @@ Step 4: GO-TO-MARKET PREPARATION
   Who:    PM, Marketing
   Output: Launch plan ready, channels prepared ✅
 
-► HUMAN GATE 5: Pre-Release Approval
-  All four above must be ✅ before passing Gate 5.
+► HUMAN GATE OP_2: Launch Readiness Approval
+  All four above must be ✅ before passing Gate OP_2.
 
-► HUMAN GATE 6: Launch Readiness (Enterprise only)
+► HUMAN GATE OP_3: Operations Approval (Enterprise only)
   All work streams (Code, Content, Legal) confirmed green.
 ```
 
@@ -114,7 +119,7 @@ After launch, the product enters a continuous operational cycle:
       │                               │              │
       │                               └──────────────┘
       │
-      ► HUMAN GATE 7: Quarterly Continue / Sunset
+      ► HUMAN GATE OP_4: Quarterly Continue / Sunset
 ```
 
 Ongoing tasks:
@@ -127,7 +132,7 @@ Ongoing tasks:
 
 ## Launch Readiness Overview
 
-Before triggering Human Gate 5, verify this summary table:
+Before triggering Human Gate OP_2, verify this summary table:
 
 | Area | Owner | Status | Notes |
 |---|---|---|---|
@@ -144,7 +149,7 @@ Before triggering Human Gate 5, verify this summary table:
 | Technical: App submitted to store | Developer | ⬜ | |
 | Technical: Analytics/monitoring configured | Developer | ⬜ | |
 
-**Pass condition:** All rows ✅ Green → proceed to Gate 5.
+**Pass condition:** All rows ✅ Green → proceed to Gate OP_2.
 
 ---
 
@@ -158,8 +163,8 @@ Before triggering Human Gate 5, verify this summary table:
 | **Go-to-market** | Social post | Multi-channel launch plan | PR + coordinated launch |
 | **Monitoring** | Crashlytics only | Analytics + crash + performance | Full APM + on-call alerts |
 | **Feedback cycle** | Ad hoc | Monthly review | Weekly triage + sprint cycle |
-| **Gate 6** | Skip | Optional | Required |
-| **Gate 7** | Skip | Optional | Required (quarterly) |
+| **Gate OP_3** | Skip | Optional | Required |
+| **Gate OP_4** | Skip | Optional | Required (quarterly) |
 
 ---
 

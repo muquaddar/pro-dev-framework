@@ -1,7 +1,7 @@
 # Planning Guide — Overview
 
 > **Version:** PDF v1.0.0 | **Kit:** Planning Kit
-> **Purpose:** Master guide for the planning phase (Stages -1 through 2)
+> **Purpose:** Master guide for the Strategic Planning kit (Gates PL_0 through PL_7)
 
 ---
 
@@ -21,23 +21,17 @@ This guide explains how the planning phase works. It is the **first file the clo
 
 ## The Planning Phase
 
-Planning covers **Stages -1 through 3** of the Pro Dev Framework:
+Planning covers **Gates PL_0 through PL_7** of the Pro Dev Framework:
 
 ```
-Stage -1: Idea Exploration & Validation
-  └── Is this idea worth building? Go / Pivot / Kill
-
-Stage 0: Environment & Project Setup
-  └── What tier? What stack? What constraints?
-
-Stage 1: Stakeholder Discovery & Deep Dives
-  └── Who is involved? What do they need? Work streams.
-
-Stage 2: Product Planning (7 Phases)
-  └── Discovery → Strategy → UX → UI → Architecture → Security → PRD Synthesis
-
-Stage 2.5: Launch & Scale Planning (4 Phases)
-  └── Testing & QA → Launch & GTM → Operations & Team → Iteration & Feedback
+Gate PL_0: Strategic Alignment (Feasibility & Validation)
+Gate PL_1: Stakeholder Discovery (Roles & Work Streams)
+Gate PL_2: Discovery & Requirements (Functional/Non-functional)
+Gate PL_3: Strategy & Design (Tech Strategy, UX/UI Tokens)
+Gate PL_4: System Architecture (Data Model & Skeleton Spec)
+Gate PL_5: Compliance & PRD Synthesis (Privacy & PRD)
+Gate PL_6: Handoff & QA Strategy (AGENT.md & Test Pyramid)
+Gate PL_7: Launch & Operations Planning (GTM & Metrics)
 ```
 
 Each stage builds on the previous one. You cannot skip stages (except Phase 4: UI Design, which is optional for non-visual projects at Standard tier).
@@ -110,7 +104,7 @@ Every planning phase follows this interaction pattern:
 
 ## Stage Sequence
 
-**NOTE:** The Planning Kit now follows the **44-File Protocol**, including both Product Planning Phases (1-7) and Launch & Scale Phases (8-11).
+**NOTE:** The Planning Kit now follows the **44-File Protocol**, covering all strategic planning gates from PL_0 to PL_7.
 
 ### Stage -1: Idea Exploration & Validation
 
@@ -291,22 +285,11 @@ Once saved, say 'saved' and we'll continue to [next step]."
 
   PLANNING PROGRESS & SAVED FILES
 
-  Stage -1: Idea Validation
-    ✅ `p_01_feasibility-assessment.md`  SAVED
-    ✅ `p_03_idea-validation-brief.md`    SAVED
-
-  Stage 0: Environment
-    ✅ `p_04_project-config.md`           SAVED
-
-  Stage 1: Stakeholders
-    ✅ `p_05_stakeholder-map.md`          SAVED
-    ✅ `p_06_product-owner.md`            SAVED
-    ✅ `p_06_lead-dev.md`                 SAVED
-    🔵 `p_07_work-streams.md`             IN PROGRESS
-    ⬜ `p_08_cross-stream-deps.md`        PENDING
-
-  Stage 2: Planning Phases
-    ⬜ Phase 1-6                       NOT STARTED
+  Planning Gates (PL_0 to PL_7)
+    ✅ `PL_0` Strategic Alignment       SAVED
+    ✅ `PL_1` Stakeholders              SAVED
+    🔵 `PL_2` Discovery & Req           IN PROGRESS
+    ⬜ `PL_3` through `PL_7`            PENDING
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

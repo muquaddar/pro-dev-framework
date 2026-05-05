@@ -112,22 +112,23 @@ pro-dev-framework/
 │       ├── asset-review.md           — Art/audio quality checklist
 │       └── compliance-review.md      — Legal & accessibility checklist
 │
-├── maintenance-kit/                  ← Post-build lifecycle
+├── maintenance-kit/                  ← Post-build lifecycle (OP_1 to OP_4)
 │   ├── README.md                     — Launch & operations overview
-│   ├── launch-prep/                  — Stage 6 templates
+│   ├── launch-prep/                  — Launch readiness templates
 │   │   ├── beta-test-plan.md         — Beta program design
 │   │   ├── app-store-submission.md   — Store listing & review prep
 │   │   ├── go-to-market.md           — Marketing launch plan
 │   │   └── compliance-final.md       — Final compliance verification
-│   ├── post-launch/                  — Stage 7 templates
+│   ├── post-launch/                  — Operations templates
 │   │   ├── monitoring-setup.md       — Error tracking, analytics
 │   │   ├── feedback-collection.md    — User feedback pipelines
 │   │   ├── iteration-workflow.md     — Feature request → build cycle
 │   │   └── retrospective.md          — Team/project retrospective
-│   └── gates/                        — Human gates for launch
-│       ├── GATE-05-release.md        — Pre-release approval
-│       ├── GATE-06-launch.md         — Launch readiness (all streams)
-│       └── GATE-07-continue.md       — Quarterly continue/sunset
+│   └── gates/                        — Human gates for operations
+│       ├── OP_1_content.md           — Content Audit & Strategy
+│       ├── OP_2_launch.md            — Launch Readiness Checklist
+│       ├── OP_3_ops.md               — Operations & Support Manual
+│       └── OP_4_maintenance.md       — Long-term Maintenance Plan
 │
 ├── update-kit/                       ← Planned for future release
 │   └── README.md                     — Coming soon
@@ -165,7 +166,7 @@ After each stage, the AI tells you exactly what file to save and where.
 
 **Step 3: Build in your IDE agent**
 
-Once planning is complete, you'll have a project folder with 15+ planning documents. Open your IDE agent (Antigravity, Claude Code, Codex) and paste the activation prompt from `building-kit/activation-prompt-template.md`.
+Once planning is complete, you'll have a project folder with 44+ planning documents. Open your IDE agent (Antigravity, Claude Code, Codex) and paste the activation prompt from `building-kit/activation-prompt-template.md`.
 
 The agent validates your planning package and begins building.
 
@@ -181,24 +182,28 @@ When building is complete, the `maintenance-kit/` guides you through beta testin
 
 If you prefer to do everything in one IDE agent:
 1. Point the agent at `building-kit/MASTER-GUIDE.md`
-2. The agent follows all 8 stages sequentially
+2. The agent follows the 16-gate sequence
 3. Higher token cost, but no platform switching
 
 ---
 
-## The 8-Stage Lifecycle
+## The 16-Gate Lifecycle
 
-| Stage | Name | Kit | Where | What |
+| Gate | Name | Kit | Where | What |
 |---|---|---|---|---|
-| **-1** | Idea Exploration | 📋 Planning | ☁️ Cloud | Hypothesis → Validate → Go/No-Go |
-| **0** | Environment Setup | 📋 Planning | ☁️ Cloud | Tier selection, sandbox, permissions |
-| **1** | Stakeholder Discovery | 📋 Planning | ☁️ Cloud | Identify all roles, deep-dive each |
-| **2** | Interactive Planning | 📋 Planning | ☁️ Cloud | 7 phases: Discovery → PRD Synthesis |
-| **3** | Scaffold | 🔨 Building | 🖥️ IDE | Walking Skeleton, config, ADR log |
-| **4** | Build | 🔨 Building | 🖥️ IDE | Milestone by milestone |
-| **5** | Verify | 🔨 Building | 🖥️ IDE | TDD, code review, security scan |
-| **6** | Launch Preparation | 🚀 Maintenance | 🖥️ IDE + Manual | Compliance, beta test, app store |
-| **7** | Post-Launch Ops | 🚀 Maintenance | 🖥️ IDE + Manual | Monitoring, feedback, iteration |
+| **PL_0** | Strategic Alignment | 📋 Planning | ☁️ Cloud | Feasibility → Validation → Go/No-Go |
+| **PL_1** | Stakeholder Discovery | 📋 Planning | ☁️ Cloud | Identify all roles, deep-dive each |
+| **PL_2** | Discovery & Req | 📋 Planning | ☁️ Cloud | Functional & Non-functional requirements |
+| **PL_3** | Strategy & Design | 📋 Planning | ☁️ Cloud | Tech Strategy, UX Flows, UI Tokens |
+| **PL_4** | Architecture | 📋 Planning | ☁️ Cloud | Data Model, System Design, Skeleton Spec |
+| **PL_5** | Compliance & PRD | 📋 Planning | ☁️ Cloud | Privacy, Security, PRD Synthesis |
+| **PL_6** | Handoff & QA | 📋 Planning | ☁️ Cloud | AGENT.md, Index, QA Strategy |
+| **PL_7** | Ops Planning | 📋 Planning | ☁️ Cloud | GTM, Hiring, RACI, Metrics, Roadmap |
+| **BL_M*** | Agile Sprints | 🔨 Building | 🖥️ IDE | Dynamic milestones (M1, M2, M3...) |
+| **OP_1** | Content Creation | 🛠️ Ops | 🖥️ IDE + M | Content Audit, Copy, Creative Assets |
+| **OP_2** | Launch Readiness | 🛠️ Ops | 🖥️ IDE + M | Pre-flight checks, Environment validation |
+| **OP_3** | Post-Launch Ops | 🛠️ Ops | 🖥️ IDE + M | Monitoring, Support Manual, Live Handoff |
+| **OP_4** | Maintenance | 🛠️ Ops | 🖥️ IDE + M | Stability, Debt Management, Versioning |
 
 **Content Creation** (🎨) runs **in parallel** with Stages 3-5. Content, assets, and compliance work tracked via dedicated work streams.
 
@@ -209,9 +214,9 @@ If you prefer to do everything in one IDE agent:
 | | Lite | Standard | Enterprise |
 |---|---|---|---|
 | **For** | Weekend hack | Multi-week product | Team / compliance |
-| **Planning** | 1-2 hours | 2-4 hours | 4-8 hours |
+| **Planning** | 2-4 hours | 4-8 hours | 8-16 hours |
 | **Milestones** | 2-3 | 4-8 | 8-15 |
-| **Human Gates** | 1 | 4 | 7 |
+| **Human Gates** | 4 (PL_0, PL_1, BL_M1, OP_2) | 10 (PL_0-PL_5, BL_*, OP_1-OP_3) | All 16 |
 | **Content Kit** | Optional | Recommended | Required |
 | **Maintenance Kit** | Skip | Core only | Full |
 
@@ -221,7 +226,7 @@ If you prefer to do everything in one IDE agent:
 
 - **5 Specialized Kits**: Each phase has its own toolkit, audience, and platform.
 - **Agent-Agnostic**: Works with any AI coding agent. Zero vendor lock-in.
-- **Human-Gated**: 7 mandatory approval checkpoints. AI never makes irreversible decisions alone.
+- **Human-Gated**: 16 mandatory approval checkpoints. AI never makes irreversible decisions alone.
 - **Switch Protocol**: Seamlessly switch between platforms mid-project. The agent generates a complete handover prompt.
 - **Consulting-Grade**: Methodology inspired by McKinsey (hypothesis-driven), ThoughtWorks (walking skeleton), and Deloitte (stakeholder interviews).
 - **Token-Efficient**: 3-tier progressive disclosure. Session start costs ~900 tokens.

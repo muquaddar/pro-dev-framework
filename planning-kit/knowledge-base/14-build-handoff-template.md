@@ -32,17 +32,17 @@ STEP 3: Provide the Activation Prompt      (Given to Human)
 Before generating the handoff, the AI acting as the Planning Facilitator must silently check that all required deliverables exist and are tagged `Status: Confirmed`.
 
 **Checklist:**
-- `p_29_prd.md`
-- `p_10_requirements.md`
-- `p_11_strategy.md`
-- `p_13_ux-flows.md`
-- `p_18_ui-design-brief.md`
-- `p_20_architecture.md`
-- `p_27_compliance.md`
-- `p_23_walking-skeleton-spec.md`
+- **PL_0:** Strategic Alignment (`p_01`-`p_03`)
+- **PL_1:** Stakeholders (`p_04`-`p_08`)
+- **PL_2:** Requirements (`p_09`-`p_10`)
+- **PL_3:** Design Strategy (`p_11`-`p_19`)
+- **PL_4:** Architecture (`p_20`-`p_23`)
+- **PL_5:** Compliance & PRD (`p_24`-`p_30`)
+- **PL_6:** Handoff & QA (`p_31`-`p_35`)
+- **PL_7:** Ops Planning (`p_36`-`p_44`)
 
 If anything is missing or unconfirmed, the AI halts and says: 
-*"Wait! We haven't finalized `[Document]`. Let's finish that before handing off to the IDE."*
+*"Wait! We haven't finalized the documents for `[Gate]`. Let's finish that before handing off to the IDE."*
 
 ---
 

@@ -2,22 +2,23 @@
 
 /**
  * generate-codebase-index.js
- * 
- * Version: PDF v1.0.0 | Kit: Building Kit
+ *
+ * Version: PDF v2.0.0 | Kit: Building Kit
  * Stage: 4 (Build) / 5 (Verify)
  * Purpose: Per-project codebase index generator.
  * Run from project root: node path/to/generate-codebase-index.js
- * 
+ *
  * Generates:
  * - docs/project-map.md (Tier 0)
  * - docs/index/[domain].md (Tier 1)
- * - docs/index/symbols/[domain].md (Tier 2)
- * 
+ * - docs/index/symbols/[domain].md (Tier 2 — now includes line ranges for Atomic Fragment Retrieval)
+ *
  * Features:
  * - .gitignore-aware file walking (reads project's .gitignore)
  * - Import/dependency analysis (builds consumer graph)
  * - Regex-based signature extraction (TS, JS, Python, Dart, C#, Go)
  * - Volatility detection via git log (falls back to mtime)
+ * - v2.0.0: Line ranges [L{start}–L{end}] in Tier 2 for Atomic Fragment Retrieval
  */
 
 const fs = require('fs');
@@ -324,6 +325,37 @@ function extractExports(filePath) {
   }
 }
 
+/**
+ * Convert a character offset in file content to a 1-based line number.
+ */
+function offsetToLine(content, offset) {
+  return content.slice(0, offset).split('\n').length;
+}
+
+/**
+ * Estimate the end line of a function/method starting at startLine.
+ * Scans forward for the closing brace of the first block encountered,
+ * or falls back to startLine + MAX_FN_LINES if no block is found.
+ */
+function estimateEndLine(content, startOffset) {
+  const MAX_FN_LINES = 60;
+  const lines = content.slice(startOffset).split('\n');
+  let depth = 0;
+  let foundOpen = false;
+
+  for (let i = 0; i < lines.length && i < MAX_FN_LINES; i++) {
+    for (const ch of lines[i]) {
+      if (ch === '{') { depth++; foundOpen = true; }
+      if (ch === '}') { depth--; }
+    }
+    if (foundOpen && depth <= 0) {
+      return offsetToLine(content, startOffset) + i;
+    }
+  }
+  // Fallback: single-line or arrow function
+  return offsetToLine(content, startOffset) + Math.min(lines.length - 1, MAX_FN_LINES);
+}
+
 function extractSignatures(filePath) {
   try {
     const content = readFileContent(filePath);
@@ -334,10 +366,13 @@ function extractSignatures(filePath) {
       const sigRegex = /export\s+(?:async\s+)?function\s+(\w+)\s*(\([^)]*\))(?:\s*:\s*([^\n{]+))?/g;
       let match;
       while ((match = sigRegex.exec(content)) !== null) {
+        const startLine = offsetToLine(content, match.index);
         signatures.push({
           name: match[1],
           params: match[2],
-          returnType: (match[3] || 'void').trim()
+          returnType: (match[3] || 'void').trim(),
+          startLine,
+          endLine: estimateEndLine(content, match.index),
         });
       }
     } else if (ext === '.py') {
@@ -345,23 +380,42 @@ function extractSignatures(filePath) {
       let match;
       while ((match = sigRegex.exec(content)) !== null) {
         if (!match[1].startsWith('_')) {
+          const startLine = offsetToLine(content, match.index);
+          // Python: find next def/class at same or lower indent as end estimate
           signatures.push({
             name: match[1],
             params: match[2],
-            returnType: (match[3] || 'None').trim()
+            returnType: (match[3] || 'None').trim(),
+            startLine,
+            endLine: startLine + 30, // Python: conservative estimate without brace counting
           });
         }
       }
     } else if (ext === '.dart') {
-      // Dart exported functions/methods (top-level only)
-      const sigRegex = /^\s*([\w<>?]+)\s+(\w+)\s*(\([^)]*\))/gm;
+      // Dart: classes and public top-level functions/methods
+      const classRegex = /^(?:abstract\s+)?class\s+(\w+)/gm;
       let match;
-      while ((match = sigRegex.exec(content)) !== null) {
-        if (!match[2].startsWith('_') && match[2][0] !== match[2][0].toUpperCase()) {
+      while ((match = classRegex.exec(content)) !== null) {
+        const startLine = offsetToLine(content, match.index);
+        signatures.push({
+          name: match[1],
+          params: '()',
+          returnType: 'class',
+          startLine,
+          endLine: estimateEndLine(content, match.index),
+        });
+      }
+      // Public methods (return type + name + params)
+      const fnRegex = /^\s{2,}((?:Future<[^>]+>|Stream<[^>]+>|[\w<>?[\]]+))\s+(\w+)\s*(\([^)]*\))/gm;
+      while ((match = fnRegex.exec(content)) !== null) {
+        if (!match[2].startsWith('_') && match[2] !== match[2].toUpperCase()) {
+          const startLine = offsetToLine(content, match.index);
           signatures.push({
             name: match[2],
             params: match[3],
-            returnType: match[1]
+            returnType: match[1],
+            startLine,
+            endLine: estimateEndLine(content, match.index),
           });
         }
       }
@@ -370,10 +424,13 @@ function extractSignatures(filePath) {
       let match;
       while ((match = sigRegex.exec(content)) !== null) {
         if (!['class', 'interface', 'enum', 'struct', 'record', 'new', 'override'].includes(match[1])) {
+          const startLine = offsetToLine(content, match.index);
           signatures.push({
             name: match[2],
             params: match[3],
-            returnType: match[1]
+            returnType: match[1],
+            startLine,
+            endLine: estimateEndLine(content, match.index),
           });
         }
       }
@@ -381,10 +438,13 @@ function extractSignatures(filePath) {
       const sigRegex = /^func\s+(?:\(\w+\s+\*?\w+\)\s+)?([A-Z]\w*)\s*(\([^)]*\))(?:\s*(\([^)]*\)|[\w.*[\]]+))?/gm;
       let match;
       while ((match = sigRegex.exec(content)) !== null) {
+        const startLine = offsetToLine(content, match.index);
         signatures.push({
           name: match[1],
           params: match[2],
-          returnType: (match[3] || '').trim() || 'void'
+          returnType: (match[3] || '').trim() || 'void',
+          startLine,
+          endLine: estimateEndLine(content, match.index),
         });
       }
     }
@@ -526,14 +586,19 @@ function generateTier1(domain, files, consumers) {
 
 function generateTier2(domain, files) {
   let output = `# ${domain} — Symbol Index\n\n`;
-  output += `> Tier 2 — Auto-generated by generate-codebase-index.js\n`;
-  output += `> Last updated: ${new Date().toISOString().split('T')[0]}\n\n`;
+  output += `> Tier 2 — Auto-generated by generate-codebase-index.js v2.0.0\n`;
+  output += `> Last updated: ${new Date().toISOString().split('T')[0]}\n`;
+  output += `> v2.0.0: Line ranges [L{start}–L{end}] enable Atomic Fragment Retrieval.\n`;
+  output += `> Agent rule: For files >200 lines, read only the required line range, not the full file.\n\n`;
 
   for (const file of files) {
     if (file.signatures.length === 0) continue;
-    output += `## ${file.path}\n\n`;
+    output += `## ${file.path} (${file.lines} lines)\n\n`;
     for (const sig of file.signatures) {
-      output += `### ${sig.name}\n`;
+      const lineRange = (sig.startLine && sig.endLine)
+        ? ` [L${sig.startLine}–L${sig.endLine}]`
+        : '';
+      output += `### ${sig.name}${lineRange}\n`;
       output += `\`\`\`\nInput:  ${sig.params}\nOutput: ${sig.returnType}\n\`\`\`\n\n`;
     }
   }
@@ -544,7 +609,7 @@ function generateTier2(domain, files) {
 // --- Main ---
 
 function main() {
-  console.log('🔍 PDF Codebase Index Generator v1.0.0\n');
+  console.log('🔍 PDF Codebase Index Generator v2.0.0\n');
 
   const projectRoot = process.cwd();
 

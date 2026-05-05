@@ -10,7 +10,7 @@
 Now that the idea is validated, establish the foundation for the project. This stage defines **what kind of project this is**, which determines how much framework machinery applies, what tools are used, and how many gates are required.
 
 **At the end of this stage, you will have:**
-- A project tier (Lite / Standard / Enterprise)
+- A project tier (Micro / Lite / Standard / Enterprise)
 - A defined technology stack
 - A clear project identity
 - Resource and constraint boundaries
@@ -27,49 +27,48 @@ The tier determines how much framework overhead applies. Choose honestly — ove
 **Decision Guide:**
 
 ```
-ASK THESE QUESTIONS:
+ASK THESE QUESTIONS (Diagnostic Bite):
 
-1. How long will this take to build?
-   □ A weekend                    → Lite
-   □ 2-6 weeks                   → Standard
-   □ Months / ongoing            → Enterprise
+1. What is the scope of the build?
+   □ Single script / bot / CLI utility   → Micro
+   □ Simple MVP with one core loop      → Lite
+   □ Full application with many features → Standard
+   □ Complex ecosystem / Multi-tenant    → Enterprise
 
-2. How many people are involved?
-   □ Just me + AI agent           → Lite or Standard
-   □ Me + content/design help     → Standard
-   □ A team (3+ people)           → Enterprise
+2. What is the expected development timeline?
+   □ A weekend (1-2 days)               → Micro
+   □ 1-2 weeks                          → Lite
+   □ 2-6 weeks                          → Standard
+   □ Months / ongoing                   → Enterprise
 
-3. Are there regulatory requirements?
-   □ No                           → Lite or Standard
-   □ Yes (COPPA, GDPR, HIPAA)    → Standard or Enterprise
+3. Who are the stakeholders?
+   □ Just the developer                 → Micro
+   □ Developer + Beta users             → Lite
+   □ Developer + Business Owner + Users → Standard
+   □ Multiple teams + Legal + Security  → Enterprise
 
-4. Will real users depend on this?
-   □ No, it's a side project      → Lite
-   □ Yes, but small audience      → Standard
-   □ Yes, at scale                → Enterprise
-
-5. Does this need content beyond code?
-   □ No                           → Lite
-   □ Some (images, copy)          → Standard
-   □ Significant (art, audio, video, localization) → Enterprise
+4. Are there critical compliance needs?
+   □ None                               → Micro or Lite
+   □ Basic privacy (GDPR)               → Lite or Standard
+   □ High-stakes (HIPAA, Fintech, COPPA) → Standard or Enterprise
 ```
 
 **Tier Comparison:**
 
-| Aspect | Lite | Standard | Enterprise |
-|---|---|---|---|
-| **Timeline** | 1-3 days | 2-6 weeks | Months |
-| **Milestones** | 2-3 | 4-8 | 8-15 |
-| **Human Gates** | Go/No-Go + Gate 1 | + Gates 2, 4, 5 | All 7 |
-| **Planning Phases** | 1, 2, 5 only | All, Phase 4 optional | All required |
-| **Stakeholder Dives** | 1-2 key roles | All identified | All + RACI |
-| **Work Streams** | Code only | Code + 1-2 | All identified |
-| **TDD** | No | Recommended (60%) | Mandatory (80%) |
-| **Content Kit** | Skip | Recommended | Required |
-| **Maintenance Kit** | Skip | Core only | Full |
-| **Session Memory** | Optional | Recommended | Mandatory |
-| **ADR Log** | Optional | Recommended | Mandatory |
-| **Quality Scorecard** | Skip | Per-milestone | Per-milestone + aggregate |
+| Aspect | Micro | Lite | Standard | Enterprise |
+|---|---|---|---|---|
+| **Timeline** | 1-2 days | 1-2 weeks | 2-6 weeks | Months |
+| **Milestones** | 1 | 2-3 | 4-8 | 8-15 |
+| **Human Gates** | Gate 1 only | Go/No-Go + Gate 1 | + Gates 2, 4, 5 | All 7 |
+| **Planning Phases** | 1, 5 only | 1, 2, 5 only | All, Phase 4 optional | All required |
+| **Stakeholder Dives** | 0 | 1-2 key roles | All identified | All + RACI |
+| **Work Streams** | Code only | Code only | Code + 1-2 | All identified |
+| **TDD** | No | No | Recommended (60%) | Mandatory (80%) |
+| **Content Kit** | Skip | Skip | Recommended | Required |
+| **Maintenance Kit** | Skip | Skip | Core only | Full |
+| **Session Memory** | Skip | Optional | Recommended | Mandatory |
+| **ADR Log** | Skip | Optional | Recommended | Mandatory |
+| **Quality Scorecard** | Skip | Skip | Per-milestone | Per-milestone + aggregate |
 
 **Facilitator prompts:**
 ```
@@ -251,7 +250,7 @@ kit: "planning"
 phase: 0
 phase_name: "Environment Setup"
 status: "confirmed"
-tier: "standard"                         # lite | standard | enterprise
+tier: "standard"                         # micro | lite | standard | enterprise
 created_at: "YYYY-MM-DD"
 confirmed_at: "YYYY-MM-DD"
 confirmed_by: "human"
@@ -260,7 +259,7 @@ confirmed_by: "human"
 # Project Configuration — [PROJECT_NAME]
 
 ## Tier
-[Lite / Standard / Enterprise]
+[Micro / Lite / Standard / Enterprise]
 Rationale: [Why this tier was chosen]
 
 ## Technology Stack
@@ -279,10 +278,26 @@ Rationale: [Why this tier was chosen]
 - Work Streams: [Which streams are active]
 - Content Kit: [Required / Recommended / Skip]
 - Maintenance Kit: [Full / Core / Skip]
-- Session Memory: [Mandatory / Recommended / Optional]
+- Session Memory: [Skip / Mandatory / Recommended / Optional]
+- ADR Log: [Skip / Mandatory / Recommended / Optional]
 
 ## Next Step
 → Stage 1: Stakeholder Discovery & Deep Dives
+```
+
+### Micro Tier Preset
+```
+Planning Phases:       1 (Discovery), 5 (Architecture)
+Human Gates:           Gate 1
+TDD:                   No
+Work Streams:          Code only
+Content Kit:           Skip
+Maintenance Kit:       Skip
+Session Memory:        Skip
+ADR Log:               Skip
+Drift Detection:       None
+Quality Scorecard:     Skip
+Milestones:            1
 ```
 
 ---

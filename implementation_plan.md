@@ -562,29 +562,46 @@ All files under `d:\MyAIAgency\WorkspaceAddOn\pro-dev-framework\`.
 - [x] All doc templates (progress, milestones, api-spec, data-model, screen-map, module-map, etc.)
 - [x] quality-scorecard.md
 
-### M9 — Content Creation Kit
-- [ ] README.md + 4 role guides
-- [ ] 4 templates + 3 checklists
-- **Done when:** A content creator can independently follow the pipeline
+### M9 — Content Creation Kit ✅ COMPLETE
+- [x] README.md + 4 role guides
+- [x] 4 templates + 3 checklists
+- **Done:** A content creator can independently follow the pipeline
 
-### M10 — Maintenance Kit
-- [ ] README.md + 4 launch-prep files + 4 post-launch files
-- [ ] 3 gate files (Gates 5-7)
-- **Done when:** Full launch-to-operations lifecycle documented
+### M10 — Maintenance Kit ✅ COMPLETE
+- [x] README.md + 4 launch-prep files + 4 post-launch files
+- [x] 3 gate files (Gates 5-7)
+- **Done:** Full launch-to-operations lifecycle documented
 
 ### M11 — State Protocol + Memory + Scripts (building-kit) ✅ COMPLETE
 - [x] 6 memory templates (after merges)
 - [x] skill-file-format.md
 - [x] 4 scripts + 2 CI/CD files
-- Scripts verified: all 3 pass `--help` test
+- [x] Scripts verified: all 3 pass `--help` test
 
-### M12 — Update Kit + Final Polish
-- [ ] update-kit/README.md
-- [ ] All internal links verified
-- [ ] Version stamp PDF v1.0.0 on all files
-- [ ] Zero agent-specific syntax in core files
-- [ ] Build Handoff → AGENT.md validation
-- **Done when:** Framework passes all verification checks
+### M12 — Update Kit + Final Polish ✅ COMPLETE
+- [x] update-kit/README.md
+- [x] All internal links verified
+- [x] Version stamp PDF v2.0.0 on all files
+- [x] Zero agent-specific syntax in core files
+- [x] Build Handoff → AGENT.md validation
+- [x] Framework passes all verification checks
+
+### M13 — Token Optimization v2.0.0 ✅ COMPLETE
+- [x] Hot Zone Scratchpad (`.claude-state.md` template + auto-generator)
+- [x] Atomic Fragment Retrieval (line ranges in Tier 2)
+- [x] Model Routing guidance (Haiku / Sonnet / Opus)
+- [x] ADR-to-Skill Autoloop (`adr-to-skill.js`)
+- [x] Agency Knowledge system (`agency-knowledge/` directory)
+- [x] Flutter-specific lenses (bloc-feature, data-entity)
+- [x] Updated framework-digest to v2.0.0
+- [x] Cross-project shadow knowledge enabled
+
+### M14 — PDF Dashboard + User Journey ✅ COMPLETE
+- [x] Dashboard webapp deployed (portfolio view, project cards, validation)
+- [x] User journey documentation (`USER_JOURNEY.md`)
+- [x] Step-by-step guides for planning, build, launch phases
+- [x] Instructions for new projects and developers
+- [x] Token optimization how-to guide
 
 ---
 
@@ -617,22 +634,27 @@ Files removed during optimization:
 | Root | 5 | ✅ 5/5 |
 | 📋 Planning Kit | 22 | ✅ 22/22 |
 | 🔨 Building Kit | 59 | ✅ 59/59 |
-| 🎨 Content Creation Kit | 12 | ⬜ 0/12 |
-| 🚀 Maintenance Kit | 12 | ⬜ 0/12 |
-| 🔄 Update Kit | 1 | ⬜ 0/1 |
-| **Total** | **111** | **86/111 (~77%)** |
+| 🎨 Content Creation Kit | 12 | ✅ 12/12 |
+| 🚀 Maintenance Kit | 12 | ✅ 12/12 |
+| 🔄 Update Kit | 1 | ✅ 1/1 |
+| **Total** | **111** | **✅ 111/111 (100%)** |
 
 ---
 
-## Future: PDF Project Dashboard Webapp
+## PDF Project Dashboard
 
-A planned interactive web application to track all projects built with this framework. Design decisions made in `13-output-formats.md`:
+An interactive web application that tracks all projects built with this framework. Live and deployed.
 
-- Scans `**/docs/pdf-manifest.json` across a configurable root directory
+**Features:**
+- Scans `**/docs/pdf-manifest.json` across all projects
 - Renders project cards with: name, tier badge, tech stack, phase progress bar
 - Deep links into individual phase files
-- Runs validation checks and flags issues
+- Runs validation checks and flags YAML schema errors
+- Shows milestone progress and hot zones
+- Displays agency knowledge base (cross-project skills)
 - Data source: YAML frontmatter in every deliverable + pdf-manifest.json per project
+
+**Status:** ✅ Deployed (check team wiki for dashboard URL)
 
 ---
 

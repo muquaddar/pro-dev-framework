@@ -1,6 +1,6 @@
 # Planning Kit Output Formats — Deliverable Templates
 
-> **Version:** PDF v1.0.0 | **Kit:** Planning Kit
+> **Version:** PDF v1.1.0 | **Kit:** Planning Kit
 > **Stage:** Reference | **Category:** Formats
 > **Tier:** All
 > **Prerequisite:** N/A
@@ -35,7 +35,7 @@ pdf_version: "1.0.0"                    # Framework version that produced this f
 project_id: "first-words-app"           # URL-safe slug, unique per project
 project_name: "First Words"             # Human-readable project name
 kit: "planning"                         # planning | building | content | maintenance
-phase: 1                                # Phase number (1-7), or 0 for pre-phase files
+phase: 1                                # Phase number (0-15 for 16 gates), or 0 for pre-phase files
 phase_name: "Discovery"                 # Human-readable phase name
 status: "confirmed"                     # draft | in-progress | confirmed
 tier: "standard"                        # lite | standard | enterprise
@@ -148,10 +148,15 @@ docs/
 │   ├── p_24_privacy-strategy.md
 │   ├── p_25_security-model.md
 │   └── p_26_accessibility-constraints.md
-└── stakeholders/                ← Stage 1 outputs
-    ├── p_05_stakeholder-map.md
-    ├── p_06_<role>.md           ← one per identified stakeholder
-    └── p_07_work-streams.md
+├── stakeholders/                ← Stage 1 outputs
+│   ├── p_05_stakeholder-map.md
+│   ├── p_06_<role>.md           ← one per identified stakeholder
+│   └── p_07_work-streams.md
+└── operations/                  ← Post-Launch Kit (OP_1-4)
+    ├── p_45_content-audit.md
+    ├── p_46_launch-readiness.md
+    ├── p_47_ops-manual.md
+    └── p_48_maintenance-plan.md
 ```
 
 ### File Name Rules
@@ -163,7 +168,7 @@ docs/
 | Kebab-case for descriptors | `p_05_stakeholder-map.md` | URL-friendly, matches `project_id` style |
 | `.md` for text, `.html` for visuals | `p_20_architecture.md`, `p_21_architecture.html` | Clear tool chain separation |
 | No spaces, no underscores in filenames | `p_18_ui-design-brief.md` | Prevents shell escaping issues |
-| Files 1–32 → p_01 to p_32 | `p_01_feasibility-assessment.md` through `p_32_AGENT.md` | Strict sequence, no gaps |
+| Files 1–48 → p_01 to p_48 | `p_01_feasibility-assessment.md` through `p_48_maintenance-plan.md` | Strict sequence, no gaps |
 
 ---
 
@@ -176,7 +181,7 @@ This is the **single source of truth** the dashboard webapp reads per project. T
 ```json
 {
   "$schema": "https://prodevframework.dev/schemas/manifest-v1.json",
-  "pdf_version": "1.0.0",
+  "pdf_version": "1.1.0",
   "project_id": "first-words-app",
   "project_name": "First Words",
   "description": "Ad-free vocabulary learning game for toddlers age 3-5.",
@@ -280,7 +285,7 @@ Below are the exact Markdown structures for the 7 core phase deliverables.
 
 ```markdown
 ---
-pdf_version: "1.0.0"
+pdf_version: "1.1.0"
 project_id: "[project-slug]"
 project_name: "[Project Name]"
 kit: "planning"
@@ -325,7 +330,7 @@ confirmed_by: "human"
 
 ```markdown
 ---
-pdf_version: "1.0.0"
+pdf_version: "1.1.0"
 project_id: "[project-slug]"
 project_name: "[Project Name]"
 kit: "planning"
@@ -366,7 +371,7 @@ confirmed_by: "human"
 
 ```markdown
 ---
-pdf_version: "1.0.0"
+pdf_version: "1.1.0"
 project_id: "[project-slug]"
 project_name: "[Project Name]"
 kit: "planning"
@@ -407,7 +412,7 @@ confirmed_by: "human"
 
 ```markdown
 ---
-pdf_version: "1.0.0"
+pdf_version: "1.1.0"
 project_id: "[project-slug]"
 project_name: "[Project Name]"
 kit: "planning"
@@ -455,7 +460,7 @@ confirmed_by: "human"
 
 ```markdown
 ---
-pdf_version: "1.0.0"
+pdf_version: "1.1.0"
 project_id: "[project-slug]"
 project_name: "[Project Name]"
 kit: "planning"
@@ -502,7 +507,7 @@ See: `docs/p_23_walking-skeleton-spec.md`
 
 ```markdown
 ---
-pdf_version: "1.0.0"
+pdf_version: "1.1.0"
 project_id: "[project-slug]"
 project_name: "[Project Name]"
 kit: "planning"
@@ -545,7 +550,7 @@ confirmed_by: "human"
 
 ```markdown
 ---
-pdf_version: "1.0.0"
+pdf_version: "1.1.0"
 project_id: "[project-slug]"
 project_name: "[Project Name]"
 kit: "planning"
